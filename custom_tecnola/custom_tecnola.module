@@ -1,0 +1,123 @@
+<?php
+
+/**
+ * Implements hook_block_info
+ * @return array
+ */
+function custom_tecnola_block_info() {
+
+  $blocks['cart_link'] = array(
+    'info' => t('Cart Link'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+}
+
+function custom_tecnola_block_view($delta = ''){
+  $block = array();
+
+  switch ($delta) {
+    case 'cart_link':
+      $block['subject'] = t('Cart Link');
+      $block['content'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="cart"><a href="/cart">Carro de compras</a><span class="amount">$ '.custom_tecnola_current_order().'</span></div>',
+      );
+      break;
+  }
+  return $block;
+}
+
+function custom_tecnola_current_order(){
+  global $user;
+  $value = 0;
+
+  $order = commerce_cart_order_load($user->uid);
+
+  if ($order) {
+    $wrapper = entity_metadata_wrapper('commerce_order', $order);
+    $line_items = $wrapper->commerce_line_items;
+    $total = commerce_line_items_total($line_items);
+    if($total['amount']){
+      $value = $total['amount'];
+    }
+  }
+
+  return number_format($value, '0', ',', '.');
+}
+/**
+ * Implements hook_form_FORM_ID_alter().
+ * Specific alteration for user login block
+ */
+function custom_tecnola_form_user_login_block_alter(&$form, &$form_state) {
+	unset($form['links']);
+
+	$form['register'] = array(
+	    '#type' => 'item',
+	    '#markup' => l(t('Create new account'), 'user/register', array('attributes' => array('class' => array(drupal_html_class('register-link'))))),
+	    '#weight' => -50,
+  	);
+
+	unset($form['name']['#title']);
+  	$form['name']['#attributes']['placeholder'] = 'E-mail';
+
+  	unset($form['pass']['#title']);
+  	$form['pass']['#attributes']['placeholder'] = 'Contraseña';
+
+  	$form['new_pass'] = array(
+	    '#type' => 'item',
+	    '#markup' => l(t('Request new password'), 'user/password', array('attributes' => array('class' => array(drupal_html_class('pass-link'))))),
+  	);
+
+  	$form['actions']['submit']['#value'] = 'Ingresar';
+}
+
+/**
+ * Implements hook_menu
+ * @return array
+ */
+function custom_tecnola_menu() {
+  $items = array();
+
+  $items['admin/config/system/general'] = array(
+    'title' => t('Tecnola config'),
+    'description' => 'Configuration for Tecnola',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('custom_tecnola_general_form'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+function custom_tecnola_general_form($form, &$form_state) {
+  $form['tecnola_trm_dolar'] = array(
+    '#type' => 'textfield',
+    '#title' => t('TRM'),
+    '#default_value' => variable_get('tecnola_trm_dolar', NULL),
+    '#size' => 10,
+    '#maxlength' => 10,
+    '#description' => t('Write The TRM for today '). format_date(time(), 'custom', t('F, j. ', array(), array('context' => 'php date format'))). t('Please use only numbers and "," for decimals'),
+    '#required' => TRUE,
+  );
+
+  $form['tecnola_vat_min'] = array(
+    '#type' => 'textfield',
+    '#title' => t('VAT excent until'),
+    '#default_value' => variable_get('tecnola_vat_min', NULL),
+    '#size' => 10,
+    '#maxlength' => 20,
+    '#description' => t("Please write the max price value that does not apply the VAT, the products classification where does not aplly is configured in a price rule. Please use only numbers and ',' for decimals'"),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+function custom_tecnola_init(){
+
+  drupal_add_js(drupal_get_path('module', 'custom_tecnola') . '/js/custom_tecnola.js');
+
+}

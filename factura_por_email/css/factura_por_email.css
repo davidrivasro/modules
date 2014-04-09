@@ -1,0 +1,155 @@
+/* Page factura-por-email */
+#factura-por-email-wrapper{ min-height: 500px; width: 100%;}
+#factura-por-email-wrapper .inner{ margin-left: auto; margin-right: auto; width: 735px; margin-top: 25px;}
+#factura-por-email-wrapper .factura-por-email-title-text{ border-bottom: 1px solid #EEEEEE;
+    font-family: Arial; font-size: 19px; font-weight: normal; height: 30px;}
+#factura-por-email-wrapper .factura-por-email-title-text.min{ margin: 0 auto 20px; width: 430px;}
+#factura-por-email-wrapper #tyc-wrapper { display: none;}
+.fancybox-wrap .ez-checkbox,
+#factura-por-email-wrapper .ez-checkbox { background: none !important;}
+.fancybox-wrap .ez-checkbox input.ez-hide,
+#factura-por-email-wrapper .ez-checkbox input.ez-hide { opacity: 1 !important; margin: -1px 3px 0 3px;}
+#factura-por-email-wrapper .form-item,
+#factura-por-email-wrapper .form-actions{ margin-top: 1px !important; margin-bottom: 1px !important;}
+
+/* Step 1 form */
+#factura-por-email-form{ width: 400px; font-size: 12px; color: #777777; font-family: arial;
+    border-radius: 2px; box-shadow: 0 1px 1px 1px #BBBBBB; font-weight: normal; height: 250px;
+    margin: 0 auto; padding: 15px 15px; /*width: 448px;*/}
+#factura-por-email-form div > .form-item{ clear: both;}
+#factura-por-email-form div > .form-item hr{ border: 0px solid #fff; height: 7px;}
+#factura-por-email-form div > .form-item.form-item-field-cellphone-number{ }
+#factura-por-email-form div > .form-item label{ width: 130px; float: left; padding: 12px 0 0 0;}
+#factura-por-email-form div > .form-item input{ width: 220px; float: left; padding: 7px 7px;
+    border: 1px solid #CCCCCC; border-radius: 3px; color: #777777; font-size: 12px; height: 15px;}
+#factura-por-email-form div > .messages { margin: 1px 0 0 0; padding: 0; width: 26px; height: 30px;
+    float: right;  background-position: 1px 5px; border-radius: 3px; border: none; background-color: #fff;}
+#factura-por-email-form .form-actions{ width: 250px; margin-top: 55px; margin-left: 75px; padding-top: 12px;}
+#factura-por-email-form .form-actions .form-item{color: #555555; cursor: pointer; display: block; float: right;
+    font-family: arial; font-size: 15px; padding-left: 1px; padding-top: 13px;}
+#factura-por-email-form .form-actions .form-item a { color: #333333; font-size: 13.5px; font-weight: bold;
+    margin-left: 25px; text-decoration: none;}
+#factura-por-email-form .form-actions #factura-por-email-submit{ float: left;}
+#factura-por-email-form .form-actions #factura-por-email-submit .form-item{ width: 150px; height: 50px;
+    background-image: url("../images/btn_siguiente.png"); margin-top: 5px; padding: 0;}
+#factura-por-email-form .form-actions #edit-continue{ display: none;}
+#factura-por-email-form #edit-field-legend{ padding-bottom: 15px;}
+
+
+/* Step 2 form */
+#factura-por-email-token-form{ width: 400px; font-size: 12px; color: #777777; font-family: arial;
+    border-radius: 2px; box-shadow: 0 1px 1px 1px #BBBBBB; font-weight: normal; height: 235px;
+    margin: 0 auto; padding: 15px 15px; /*width: 448px;*/}
+#factura-por-email-token-form div > .form-item{ clear: both;}
+#factura-por-email-token-form div > .form-item hr{ border: 0px solid #fff; height: 3px;}
+#factura-por-email-token-form div > #edit-hr2  hr{ height: 5px;}
+#factura-por-email-token-form div > #edit-hr3  hr{ border-bottom: 1px solid #ddd; height: 1px; padding-top: 20px; margin-bottom: 17px;}
+#factura-por-email-token-form div > .form-item label{ width: 130px; float: left; padding: 13px 0 0 0;}
+#factura-por-email-token-form div > .form-item input{ width: 170px; float: left; padding: 7px 7px;
+    border: 1px solid #CCCCCC; border-radius: 3px; color: #777777; font-size: 12px; height: 15px;}
+#factura-por-email-token-form div > .form-item input[readonly='readonly'],
+#factura-por-email-token-form div > .form-item input[disabled='disabled'] { width: 250px; text-overflow: ellipsis;
+    background-color: #fff; border-color: #fff; padding-left: 0px;}
+#factura-por-email-token-form div > .factura-por-email-reenviar-token { text-align: right; padding: 8px; font-size: 13px;
+    cursor: pointer; font-weight: bold; /*letter-spacing: 0.3px;*/ color: #333;}
+#factura-por-email-token-form div > .factura-por-email-reenviar-token:hover{ color: #777; /*text-decoration: underline;*/}
+#factura-por-email-token-form .form-actions{ width: 250px; margin-top: 9px; margin-left: 75px;}
+#factura-por-email-token-form .form-actions .form-item{color: #555555; cursor: pointer; display: block; float: right;
+    font-family: arial; font-size: 15px; padding-left: 1px; padding-top: 13px;}
+#factura-por-email-token-form .form-actions .form-item a { color: #333333; font-size: 13.5px; font-weight: bold;
+    margin-left: 25px; text-decoration: none;}
+#factura-por-email-token-form .form-actions #factura-por-email-submit{ float: left;}
+#factura-por-email-token-form .form-actions #factura-por-email-submit .form-item{ width: 150px; height: 50px;
+    background-image: url("../images/btn_siguiente.png"); margin-top: 5px; padding: 0;}
+#factura-por-email-token-form .form-actions #edit-continue{ display: none;}
+
+
+/* Terms & conditions */
+.fancybox-wrap .alert-container { color: #3366AA; font-family: arial; font-size: 16px;}
+.fancybox-wrap .alert-container.tyc { min-width: 650px;}
+.fancybox-wrap .alert-container h2 { font-size: 21px; margin: 0 0 7px;}
+.fancybox-wrap .alert-container #factura-por-email-tyc-title { height: 22px; width: 228px;
+    background-image: url("../images/modal_title.png");}
+.fancybox-wrap .alert-container .factura-terminos_condiciones { background-color: #FFFFFF;
+    border: 1px solid #CCCCCC; border-radius: 2px 2px 2px 2px; margin: 10px 0; padding: 15px 15px 15px 20px;}
+.fancybox-wrap .alert-container pre { background-color: #FFFFFF; color: #333333; font-family: arial;
+    font-size: 10px; height: 200px; margin: 0; overflow-y: scroll; padding: 0; white-space: pre-wrap;}
+.fancybox-wrap .accept-terms { color: red; display: none; font-size: 13px; margin-top: -20px;
+    padding: 3px 0 0 24px; width: 300px;}
+.fancybox-wrap .alert-container span { background-color: #EEEEEE; border: 1px solid #CCCCCC; float: right;
+    border-radius: 11px 11px 11px 11px; color: #777777; cursor: pointer; display: block; text-transform: uppercase;
+    font-family: arial; font-size: 15px; margin-left: 15px; margin-top: 10px; padding: 3px 15px;}
+.fancybox-wrap .alert-container span.accept-factura-por-email { background: url("../images/modal_btn.png") repeat scroll 0 0 transparent;
+    border: medium none; border-radius: 0 0 0 0; height: 38px; margin-top: -30px; width: 130px;}
+
+
+/* Error page */
+h1.factura-por-email-title-text { border-bottom: 1px solid #EEEEEE; font-family: Arial; font-size: 19px;
+    font-weight: normal; height: 30px; margin: 5px 0 25px -1px; width: 730px;}
+#factura-por-email-error { background-color: #E5E8F9; border: 1px solid #5560BB; color: #5560BB; font-family: Arial;
+    margin-bottom: 50px; margin-left: auto; margin-right: auto; padding: 30px 40px 20px; text-align: center; width: 350px;}
+#factura-por-email-error h2 { font-size: 16px !important; font-weight: bold; margin-bottom: 15px !important;
+    margin-left: 0; margin-right: 0; margin-top: 0; padding: 0;}
+#factura-por-email-error p { color: #5560BB; font-size: 12px;}
+#factura-por-email-error a.btn-error-home { background-image: url("../images/btn_error_home.png");
+    display: block; height: 33px; margin-left: auto; margin-right: auto; width: 125px;}
+
+
+/* fix for input error */
+#factura-por-email-wrapper #factura-por-email-form div > .form-item input.error,
+#factura-por-email-wrapper #factura-por-email-form div > .form-item textarea.error,
+#factura-por-email-wrapper #factura-por-email-form div > .form-item select.error,
+#factura-por-email-wrapper #factura-por-email-token-form div > .form-item input.error,
+#factura-por-email-wrapper #factura-por-email-token-form div > .form-item textarea.error,
+#factura-por-email-wrapper #factura-por-email-token-form div > .form-item select.error { border: 2px solid red;}
+
+
+/* Pagina de confirmacion */
+h1.factura-por-email-title.confirm-payment{ background-image: url("../images/titulo_confirmacion.png");}
+#factura-por-email-form.confirmation{ padding-bottom: 0px; width: 699px; height: 300px;}
+#factura-por-email-form #factura-por-email-confirmation-img{ float: left; display: block; width: 125px; height: 300px;
+    margin-left: 25px; background-image: url("../images/img_confirmation.png");}
+#factura-por-email-form .response{ width: 505px; float: right;}
+#factura-por-email-form span.title-bill{ display: block; width: 409px; height: 54px; margin-bottom: 20px;
+    background-image: url("../images/subtitulo_confirmacion.png");}
+#factura-por-email-form span.response-id,
+#factura-por-email-form span.response-info{ display: block; width: 100%; padding: 20px 0px; border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd; color: #333; font-size: 12px; line-height: 15px;}
+#factura-por-email-form span.response-id{ border-top: none; font-size: 17px; font-weight: bold;}
+#factura-por-email-form a.btn-confirm-home{ display: block; width: 165px; height: 50px; margin-top: 20px; float: right;
+    background-image: url("../images/btn_ir-al-home.png");}
+
+
+/* Search */
+#edit-factura-por-email-search{}
+#edit-factura-por-email-search label{ width: 110px; float: left;}
+#edit-factura-por-email-search .form-type-date{ width: 330px; float: left;}
+#edit-factura-por-email-search .form-item-email{ width: 100%; clear: both;}
+#edit-factura-por-email-search .form-disabled input{ border: 0px solid #fff !important; background-color: #fff !important; color: #000 !important;}
+
+
+/* styles for terms&conditions */
+.fancybox-wrap .alert-container{ color: #3366AA; font-size: 16px; font-family: arial;}
+.fancybox-wrap .alert-container .factura-terminos_condiciones{ border: 1px solid #ccc; border-radius: 2px; margin: 10px 0; padding: 15px 15px 15px 20px;
+    background-color: #FFF;}
+.fancybox-wrap .alert-container pre{ height: 200px; overflow-y: scroll; background-color: #FFF;/*rgba(150, 150, 150, 0.10);*/
+    white-space: pre-wrap; font-size: 13px; margin: 0; padding: 0; font-family: arial; font-size: 10px; color: #333;}
+.fancybox-wrap .alert-container h2{ font-size: 21px; margin: 0; margin-bottom: 7px;}
+.fancybox-wrap .alert-container h3{ font-size: 17px; margin: 0;}
+.fancybox-wrap .alert-container span{ font-size: 15px; float: right; display: block; padding: 3px 15px; border: 1px solid #ccc;
+    border-radius: 11px; margin-left: 15px; text-transform: uppercase; color: #777; font-family: arial; background-color: #eee;
+    cursor: pointer; margin-top: 10px; }
+.fancybox-wrap .fancybox-skin{
+    /* fallback */ background-color: #FBFBFC; background: url("../images/modal_bg.png"); background-repeat: repeat-x; border-radius: 2px;
+    /* Safari 4-5, Chrome 1-9 */ background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FBFBFC), to(#F0F1F5));
+    /* Safari 5.1, Chrome 10+ */ background: -webkit-linear-gradient(top, #FBFBFC, #F0F1F5);
+    /* Firefox 3.6+ */           background: -moz-linear-gradient(top, #FBFBFC, #F0F1F5);
+    /* IE 10 */                  background: -ms-linear-gradient(top, #FBFBFC, #F0F1F5);
+    /* Opera 11.10+ */           background: -o-linear-gradient(top, #FBFBFC, #F0F1F5); }
+.fancybox-wrap .accept-terms{ display: none; color: red; font-size: 13px; margin-top: -20px; padding: 3px 0 0 24px; width: 300px;}
+.fancybox-wrap .alert-container.tyc{ min-width: 650px;}
+.fancybox-wrap .alert-container #pago_express-tyc-title{ width: 228px; height: 22px; background-image: url("../images/modal_title.png");}
+.fancybox-wrap .fancybox-close{ width: 34px; height: 34px; background-image: url("../images/modal_close.png");}
+.fancybox-wrap .alert-container span.alert-accept{ width: 130px; height: 38px; margin-top: -30px; border: none; background: none; border-radius: 0; background-image: url("../images/modal_btn.png");}
+/* hide terms&conditions on page */
+#tyc-wrapper{ display: none;}

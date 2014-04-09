@@ -1,0 +1,17 @@
+name = Tigo star sitewide
+description = Sitewide block placement
+core = 7.x
+package = Tigo Star
+php = 5.2.4
+version = 7.x-1.2
+project = ts_sitewide
+dependencies[] = block
+dependencies[] = blockify
+dependencies[] = context
+dependencies[] = menu
+dependencies[] = simplenews
+dependencies[] = tigo_redes_sociales
+dependencies[] = ts
+features[context][] = tigostar_sitewide_context
+features[ctools][] = context:context:3
+features[features_api][] = api:1

@@ -1,0 +1,65 @@
+<?php
+/*
+ * SummaSolutions.net
+ */
+
+/*
+ * Hook enable
+ */
+function factura_por_email_enable(){
+
+    if (!db_table_exists('factura_por_email_status_log')) {
+        $schema = drupal_get_schema_unprocessed('factura_por_email');
+        db_create_table('factura_por_email_status_log', $schema['factura_por_email_status_log']);
+    }
+}
+
+/*
+ * Table schemas
+ */
+function factura_por_email_schema(){
+
+    $schema['factura_por_email_status_log'] = array(
+        'fields' => array(
+            'tid' => array(
+                'description' => 'Transaction ID',
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'unique' => TRUE,
+            ),
+            'msisdn' => array(
+                'type' => 'int',
+                'length' => 11,
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => 0,
+                'description' => 'The msisdn for this operation',
+            ),
+            'tdate' => array(
+                'type' => 'varchar',
+                'length' => 20,
+                'not null' => TRUE,
+                'default' => '20130701 00 00 00',
+                'description' => 'Timestamp for this operation',
+            ),
+            'email' => array(
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '@',
+                'description' => 'Email',
+            ),
+            'status' => array(
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => ' ',
+                'description' => 'The status for this operation',
+            ),
+        ),
+        'primary key' => array('tid'),
+    );
+
+    return $schema;
+}

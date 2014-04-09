@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Premium feature.
+ */
+
+include_once('premium.features.inc');

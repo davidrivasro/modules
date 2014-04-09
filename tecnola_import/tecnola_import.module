@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * IMplements hook_permission
+ * @return array Permissions
+ */
+function tecnola_import_permission() {
+  $perm = array();
+
+  $perm['tecnola import products'] = array(
+    'title' => 'Import products',
+    'description' => t('Allow import products from CSV Files'),
+  );
+
+  return $perm;
+}
+
+/**
+ * Implements hook_menu()
+ */
+function tecnola_import_menu() {
+  $items = array();
+
+  $items['admin/config/system/upload_csv'] = array(
+    'title' => t('Import Tecnola Products'),
+    'type' => MENU_NORMAL_ITEM,
+    'description' => 'Import the csv files',
+    'page callback' => 'tecnola_import_page',
+    'access arguments' => array('tecnola import products'),
+    'file' => 'tecnola_import.admin.inc',
+  );
+
+  return $items;
+}
+

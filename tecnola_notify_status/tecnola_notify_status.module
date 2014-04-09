@@ -1,0 +1,60 @@
+<?php
+
+function tecnola_notify_status_check(){
+  // check if we have orders in "pending" status
+  $or = db_or()
+          ->condition('co.status', 'pending')
+          ->condition('co.status', 'en_solicitud')
+          ->condition('co.status', 'en_requerimiento')
+          ->condition('co.status', 'en_alistamiento')
+          ->condition('co.status', 'en_despacho');
+
+  $query = db_select('commerce_order', 'co');
+  $query->fields('co', array('status', 'changed', 'order_number'));
+  $query->condition($or);
+
+  $result = $query->execute();
+
+  foreach($result as $record){
+    if($record->status == 'pending'){
+      $email_content = tecnola_notify_status_mail_content('pending', $record->order_number);
+      $params = array('body' => $email_content);
+      $key = 'pending';
+      $to = 'me@aldibier.com';
+      $from = 'info@tecnola.co';
+      $mail = drupal_mail('tecnola_notify_status', $key, $to, language_default(), $params, $from);
+    }
+  }
+}
+
+
+function tecnola_notify_status_mail($key, &$message, $params) {
+  $language = $message['language'];
+
+  switch ($key) {
+//switching on $key lets you create variations of the email based on the $key parameter
+    case 'pending':
+      $message['subject'] = 'Tecnola: Alerta de orden';
+//the email body is here, inside the $message array
+      $message['body'][] = $params['body'];
+      break;
+  }
+}
+
+function tecnola_notify_status_mail_content($status, $order_id){
+
+  switch ($status) {
+    case 'pending':
+      $body = '';
+      $body .= 'Hola ';
+      $body .= 'La orden número:'. $order_id.". Se encuentra en estado pendiente y no ha sido actualizada al siguiente estado: En solicitud";
+      break;
+
+    default:
+      # code...
+      break;
+  }
+
+
+  return $body;
+}

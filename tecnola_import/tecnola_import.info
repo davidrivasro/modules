@@ -1,0 +1,14 @@
+name = "Tecnola Import"
+description = "Tecnola migration data."
+package = "Tecnola"
+core = 7.x
+dependencies[] = taxonomy
+dependencies[] = image
+dependencies[] = migrate
+dependencies[] = list
+dependencies[] = number
+dependencies[] = commerce_migrate
+dependencies[] = plupload
+
+files[] = tecnola_import.module
+files[] = data.inc

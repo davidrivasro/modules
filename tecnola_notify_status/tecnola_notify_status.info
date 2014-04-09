@@ -1,0 +1,6 @@
+name = "Tecnola Notify Status"
+description = "Send notifications to the administrator if a status is delayed."
+package = "Tecnola"
+core = 7.x
+
+files[] = tecnola_notify_status.module

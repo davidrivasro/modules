@@ -1,0 +1,133 @@
+<?php
+
+function ts_menu() {
+  //Menu to show products
+  $items = array();
+  $items['productos/%'] = array(
+    'title' => 'Products',
+    'page callback' => 'ts_get_products',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+/**
+ * Implements hook_block_info().
+ */
+function ts_block_info() {
+  $blocks['other_products_link'] = array(
+    'info' => t('Other prducts link'),
+    'cache' => DRUPAL_NO_CACHE
+  );
+  $blocks['header_mobile'] = array(
+    'info' => t('Header mobile'),
+    'cache' => DRUPAL_NO_CACHE
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function ts_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'other_products_link':
+      $block['subject'] = t('Other prducts link');
+      $block['content'] = ts_get_other_products_link();
+      break;
+    case 'header_mobile':
+      $block['subject'] = t('Header mobile');
+      $block['content'] = ts_get_header_mobile();
+      break;
+  }
+  return $block;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ts_theme($existing, $type, $theme, $path) {
+  $themes = array();
+  $themes['header_mobile'] = array(
+      'template' => 'templates/block-header-mobile',
+      'variables' => array('title' => NULL),
+  );
+  $themes['products_web'] = array(
+      'template' => 'templates/block-products-web',
+      'variables' => array('features' => NULL , 'products' =>NULL),
+  );
+  return $themes;
+}
+
+/**
+ *funcion que retorna menu otros productos en version web
+ */
+function ts_get_other_products_link(){
+  $output = "";
+  $output.= '<div class="other-products-link"><div class="btn">'.t("Other products").'</div>';
+  $menu_tree = menu_tree_all_data('menu-other-products');
+  $output.='<div class="menu-other-products">'.render(menu_tree_output($menu_tree)).'</div></div>';
+  return $output;
+}
+
+/**
+ *funcion que retorna el header en la version mobile
+ */
+function ts_get_header_mobile(){
+  $title = drupal_get_title();
+  return theme('header_mobile' , array('title' => $title));
+}
+
+function ts_get_products($type){
+
+  drupal_set_message("Sddddd", 'status', FALSE);
+  //extraer id del termino de tipo de servicio
+  $id_stype = taxonomy_get_term_by_name($type);
+  $products = array();
+  if(!empty($id_stype)){
+    $id_stype = array_values($id_stype);
+    $id_stype = $id_stype[0]->tid;
+    //Extraer caracteristicas
+    $vid_feature = 7;
+    $features = taxonomy_get_tree($vid_feature);
+
+    $nodes = taxonomy_select_nodes($id_stype);
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+          ->entityCondition('bundle', 'plan')
+          ->propertyCondition('status', 1)
+          ->fieldCondition('field_service_type', 'tid', $id_stype, '=');
+    $result = $query->execute();
+    if (isset($result['node'])) {
+      $news_items_nids = array_keys($result['node']);
+      $news_items = entity_load('node', $news_items_nids);
+      foreach ($news_items as $key => $value) {
+        dpm($value);
+        $products[$key]->title = $value->title;
+        $products[$key]->title_reference1 = $value->field_title_reference_1['und'][0]['value'];
+        $products[$key]->title_reference2 = $value->field_title_reference_2['und'][0]['value'];
+        $products[$key]->price_prefix = $value->field_plan_price_prefix['und'][0]['value'];
+        $products[$key]->price = $value->field_plan_price['und'][0]['value'];
+        $products[$key]->price_period = $value->field_plan_price_period['und'][0]['value'];
+        $featurp = array();
+        foreach ($value->field_features['und'] as $feature) {
+          $fielcollec = entity_load('field_collection_item', array($feature['value']));
+          $fielcollec = array_values($fielcollec);
+          $id = (int)$fielcollec[0]->field_feature_term['und'][0]['tid'];
+          $featurp[$id] = $fielcollec[0]->field_feature_value['und'][0]['value'];
+        }
+        foreach($featurp as $key1 => $val){
+          $products[$key]->features[$key1] = $featurp[$key1];
+        }
+      }
+    }
+  }else{
+    drupal_set_message(t("The term doesn't exist"), 'status', FALSE);
+  }
+  return theme('products_web',array('features' => $features , 'products' => $products));
+}
+
+

@@ -1,0 +1,14 @@
+name = Tigo star homepage
+description = Homepage block placement feature
+core = 7.x
+package = Tigo Star
+php = 5.2.4
+version = 7.x-1.4
+project = ts_homepage
+dependencies[] = context
+dependencies[] = menu
+dependencies[] = ts_program
+dependencies[] = views
+features[context][] = tigostar_home
+features[ctools][] = context:context:3
+features[features_api][] = api:1

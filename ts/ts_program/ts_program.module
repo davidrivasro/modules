@@ -1,0 +1,181 @@
+<?php
+
+/**
+* Implements hook_block_info().
+*/
+function ts_program_block_info() {
+  // Bloque Parrilla de programas
+  $blocks['outstanding_programming'] = array(
+    'info' => t('Outstanding Programming'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+}
+
+
+
+/**
+* Implements hook_block_view().
+*/
+function ts_program_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'outstanding_programming':
+      //código primer bloque
+      $block['subject'] = t('Outstanding Programming');
+      $block['content'] = ts_get_programs();
+    break;
+  }
+  return $block;
+}
+
+/**
+ * Function to get programs.
+ */
+function  ts_get_programs(){
+  $view = array();
+  $view = views_get_view('ts_programs_view');
+  $view->execute();
+  $vista = $view->render('block');
+  return $vista;
+}
+
+
+/**
+* Implementation of hook_views_api().
+*/
+function ts_program_views_api() {
+  return array(
+    'api' => 3.0,
+    'path' => drupal_get_path('module', 'ts_program')
+  );
+}
+
+/**
+ * Implementation of hook_views_default_views().
+ */
+function ts_program_views_default_views() {
+  $view = new view();
+  $view->name = 'ts_programs_view';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'View Tigo Programs';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'View Tigo Programs';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Relationship: Nodequeue: Queue */
+  $handler->display->display_options['relationships']['nodequeue_rel']['id'] = 'nodequeue_rel';
+  $handler->display->display_options['relationships']['nodequeue_rel']['table'] = 'node';
+  $handler->display->display_options['relationships']['nodequeue_rel']['field'] = 'nodequeue_rel';
+  $handler->display->display_options['relationships']['nodequeue_rel']['limit'] = 1;
+  $handler->display->display_options['relationships']['nodequeue_rel']['names'] = array(
+    'ts_list_programs' => 'ts_list_programs',
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Image of Program */
+  $handler->display->display_options['fields']['field_image']['id'] = 'field_image';
+  $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
+  $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
+  $handler->display->display_options['fields']['field_image']['label'] = '';
+  $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_image']['settings'] = array(
+    'image_style' => 'medium',
+    'image_link' => '',
+  );
+  /* Field: Content: Program's date */
+  $handler->display->display_options['fields']['field_date_program']['id'] = 'field_date_program';
+  $handler->display->display_options['fields']['field_date_program']['table'] = 'field_data_field_date_program';
+  $handler->display->display_options['fields']['field_date_program']['field'] = 'field_date_program';
+  $handler->display->display_options['fields']['field_date_program']['label'] = '';
+  $handler->display->display_options['fields']['field_date_program']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_date_program']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Content: Channel's name */
+  $handler->display->display_options['fields']['field_name_channel']['id'] = 'field_name_channel';
+  $handler->display->display_options['fields']['field_name_channel']['table'] = 'field_data_field_name_channel';
+  $handler->display->display_options['fields']['field_name_channel']['field'] = 'field_name_channel';
+  $handler->display->display_options['fields']['field_name_channel']['label'] = '';
+  $handler->display->display_options['fields']['field_name_channel']['element_label_colon'] = FALSE;
+  /* Field: Content: Channel's number */
+  $handler->display->display_options['fields']['field_number_channel']['id'] = 'field_number_channel';
+  $handler->display->display_options['fields']['field_number_channel']['table'] = 'field_data_field_number_channel';
+  $handler->display->display_options['fields']['field_number_channel']['field'] = 'field_number_channel';
+  $handler->display->display_options['fields']['field_number_channel']['label'] = '';
+  $handler->display->display_options['fields']['field_number_channel']['element_label_colon'] = FALSE;
+  /* Sort criterion: Nodequeue: Position */
+  $handler->display->display_options['sorts']['position']['id'] = 'position';
+  $handler->display->display_options['sorts']['position']['table'] = 'nodequeue_nodes';
+  $handler->display->display_options['sorts']['position']['field'] = 'position';
+  $handler->display->display_options['sorts']['position']['relationship'] = 'nodequeue_rel';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'program' => 'program',
+  );
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block');
+  return $handler;
+}
+/**
+ * Implements hook_install().
+ */
+function ts_program_install() {
+  $nodequeue = new stdClass;
+  $nodequeue->api_version = 2;
+  $nodequeue->name = 'ts_list_programs';
+  $nodequeue->title = t('List of programs');
+  $nodequeue->subqueue_title = ”;
+  $nodequeue->size = 0;
+  $nodequeue->link = t('Add to list program');
+  $nodequeue->link_remove = t('Remove from list program');
+  $nodequeue->owner = 'nodequeue';
+  $nodequeue->show_in_ui = 1;
+  $nodequeue->show_in_tab = 1;
+  $nodequeue->show_in_links = 1;
+  $nodequeue->reference = ’0′;
+  $nodequeue->reverse = 1;
+  $nodequeue->i18n = 0;
+  $nodequeue->roles = array();
+  $nodequeue->types = array(0 => 'program',);
+  $nodequeue->add_subqueue = array(1 => t('List of programs'),);
+  nodequeue_save($nodequeue);
+}
+
+
+

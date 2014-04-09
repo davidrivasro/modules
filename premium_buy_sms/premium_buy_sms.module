@@ -1,0 +1,191 @@
+<?php 
+	module_load_include('inc', 'sms');
+	//premium_types
+	/**
+	 * Implements hook_menu
+	 */
+	function premium_buy_sms_menu() 
+	{
+		$items['premium_buy_sms'] = array(
+			'page callback' => 'premium_buy_sms_execute',
+			'access arguments' => array('access content'),
+			'access callback' => 'user_is_logged_in',
+			'type' => MENU_CALLBACK,
+		);
+		$items['admin/config/services/premium_buy_sms'] = array(
+			'title' => t('Premium buy sms'),
+			'description' => 'Configuration of buying content via sms',
+			'page callback' => 'drupal_get_form',
+			'page arguments' => array('premium_buy_sms_form'),
+			'access arguments' => array('administer modules'),
+			'type' => MENU_NORMAL_ITEM,
+		);
+		return $items;
+	}
+	
+	function premium_buy_sms_execute()
+	{
+		global $user;
+		
+		$prefix = variable_get('premium_buy_sms_prefix', '');
+		$account = user_load($user->uid);
+		$msisdn = @$account->field_msisdn['und'][0]['value'];
+		
+		$nid		= isset($_GET['nid']) ? trim($_GET['nid']) : 0;
+		$timestamp 	= isset($_GET['timestamp']) ? trim($_GET['timestamp']) : '';
+		$token 		= isset($_GET['token']) ? trim($_GET['token']) : '';
+		$shortcode 	= isset($_GET['shortcode']) ? trim($_GET['shortcode']) : '';
+		$keyword 	= isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
+		
+		if(strpos($token, '?') !== false){
+			$arr = explode('?', $token);
+			$token = $arr[0];
+		}
+		$hashSalt 	= drupal_get_hash_salt();
+		$confirm = md5($nid.$msisdn.$keyword.$shortcode.$timestamp.$hashSalt);
+		
+		if($token == $confirm){
+			if(module_exists('logger_ussd_sms_premium_buy_sms')){
+				module_load_include('module', 'logger_ussd_sms_premium_buy_sms', 'logger_ussd_sms_premium_buy_sms.module');
+				loggerPremiumBuySms($user->uid, $msisdn, $nid, $shortcode, $keyword);
+			}
+
+			sms_send($shortcode, $keyword, array('sender' => $prefix.$msisdn));
+			
+			$message = t('Soon receive an SMS confirmation of purchase');
+			$back	 = l(t('Back to content'), url('node/'.$nid, array('absolute'=>true)));
+		}
+		else
+		{
+			$message = t('Failure purchase by SMS');
+			$back 	 = l(t('Back to home'), url(null, array('absolute'=>true)));
+		}
+
+		
+		return theme_render_template( base_path() . drupal_get_path('module', 'premium_buy_sms') . '/premium_buy_sms.tpl.php', array('message' => $message, 'back' => $back));
+	}
+
+	/*
+	* hook_node_view_alter($build)
+	*/
+	function premium_buy_sms_node_view_alter(&$build) 
+	{
+
+		global $user;
+		
+		if(!user_is_logged_in() || arg(0) != 'node' || !is_numeric(arg(1)))
+		{
+			return;
+		}
+		
+		$account = user_load($user->uid);
+		$msisdn = @$account->field_msisdn['und'][0]['value'];
+		if(empty($msisdn)){ return; }
+
+		$nid = arg(1);
+		$node = node_load($nid);
+		if(!$node){	return;	}
+
+		if($node->type != 'premium' || isset($node->field_premium_url['und'][0]['url'])){ return; }
+		
+		//$premium_buy_sms_types = explode(',', variable_get('premium_buy_sms_types', ''));
+		
+		$premiumType		= isset($node->field_premium_type['und']['0']['tid']) ? $node->field_premium_type['und']['0']['tid'] : 0;
+		$premiumKeyword 	= isset($node->field_premium_keyword['und'][0]['value']) ? trim($node->field_premium_keyword['und'][0]['value']) : '';
+		$premiumShortcode 	= isset($node->field_premium_shortcode['und'][0]['value']) ? trim($node->field_premium_shortcode['und'][0]['value']) : '';
+		$premiumType 		= isset($node->field_premium_type['und'][0]['tid']) ? trim($node->field_premium_type['und'][0]['tid']) : '';
+		
+		
+		if(!$premiumKeyword || !$premiumShortcode || !$premiumType /*|| !in_array($premiumType, $premium_buy_sms_types)*/){ return;	}
+
+		$timestamp 	= time();
+		$hashSalt 	= drupal_get_hash_salt();
+		$url = url('premium_buy_sms',array('absolute'=>true)) 
+			. '?nid=' . $nid
+			. '&timestamp=' . $timestamp
+			. '&shortcode=' . urlencode($premiumShortcode)
+			. '&keyword=' . urlencode($premiumKeyword)
+			. '&token=' . md5($nid.$msisdn.$premiumKeyword.$premiumShortcode.$timestamp.$hashSalt);
+
+		
+		$build['links']['node']['#links']['buy-sms'] = array(
+			'title' => theme_render_template( base_path() . drupal_get_path('module', 'premium_buy_sms') . '/premium_buy_sms_link.tpl.php', array('message' => t('Comprar'), 'url' => $url)),
+			'html'	=> 1
+		); 
+	}
+	
+	function premium_buy_sms_form($form, &$form_state) 
+	{
+		$vocabulary = taxonomy_vocabulary_get_names();  //taxonomy_get_term_by_name('premium_types');
+		$vid = isset($vocabulary['premium_types']->vid) ? $vocabulary['premium_types']->vid : 0;
+		
+		$form = null;
+		if(0 != $vid)
+		{
+			$premium_buy_sms_types = explode(',', variable_get('premium_buy_sms_types', ''));
+			$terms = taxonomy_get_tree($vid);
+			if(is_array($terms))
+			{
+				foreach($terms as $term)
+				{
+					$checked = in_array($term->tid, $premium_buy_sms_types);
+						
+					$form['term'.$term->tid] = array(
+						'#type' => 'checkbox',
+						'#title' => $term->name.'6789',
+						'#default_value' => $checked,
+					);		
+				}
+			}
+		}
+		
+		$form['premium_buy_sms_prefix'] = array(
+			'#type' => 'textfield',
+			'#title' => t('Prefix'),
+			'#default_value' => variable_get('premium_buy_sms_prefix', ''),
+			'#size' => 4,
+			'#maxlength' => 4,
+			'#description' => t('Add a prefix to the MSISDN if required'),
+			'#required' => FALSE,
+		);
+		
+		$form['actions'] = array('#type' => 'actions');
+		$form['actions']['submit'] = array(
+				'#type' => 'submit',
+				'#value' => t('Save'),
+		);
+		$form['actions']['cancel'] = array(
+				'#markup' => l(t('Cancel'), url('admin/config/',array('absolute'=>true))),
+		);
+
+		return $form;
+	}
+	
+
+	function premium_buy_sms_form_submit($form, &$form_state)
+	{
+		$vocabulary = taxonomy_vocabulary_get_names();  //taxonomy_get_term_by_name('premium_types');
+		$vid = isset($vocabulary['premium_types']->vid) ? $vocabulary['premium_types']->vid : 0;
+		
+		$premium_buy_sms_types = array();
+		if(0 != $vid)
+		{
+			
+			$terms = taxonomy_get_tree($vid);
+			if(is_array($terms))
+			{
+				foreach($terms as $term)
+				{
+					if($form_state['values']['term'.$term->tid])
+					{
+						array_push($premium_buy_sms_types, $term->tid);
+					}
+				}
+			}
+		}
+		
+		variable_set('premium_buy_sms_prefix', trim($form_state['values']['premium_buy_sms_prefix']));
+		variable_set('premium_buy_sms_types', implode(',', $premium_buy_sms_types));
+		drupal_set_message(t('Settings saved'));
+
+	}

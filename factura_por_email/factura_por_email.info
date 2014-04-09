@@ -1,0 +1,24 @@
+name = Subscripción a factura por correo electrónico
+description = Permite a los usuarios configurar el envío de factura a través de email
+package = Tigo Facturación
+core = 7.x
+version = 7.x-1.0
+
+; Scripts
+scripts[] = js/factura_por_email.js
+
+; Stylesheets
+stylesheets[all][] = css/jquery.fancybox.css
+stylesheets[all][] = css/factura_por_email.css
+
+; Dependencies
+;dependencies[] = tigoapi
+;dependencies[] = tigo_online_core
+;dependencies[] = tigo_online_ws_asincrono
+
+; Files
+files[] = factura_por_email.install
+files[] = factura_por_email.module
+
+; Module configuration
+configure = admin/config/tigo-online

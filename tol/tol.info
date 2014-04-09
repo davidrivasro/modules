@@ -1,0 +1,15 @@
+
+name = "Tigo Online"
+description = "This is the main module of Tigo Online V2"
+package = "Tigo Online"
+core = 7.x
+configure = admin/config/tigo-online/tol
+stylesheets[all][] = css/tol.css
+scripts[] = js/tol.js
+#scripts[] = js/iphone-style-checkboxes.js
+
+dependencies[] = tigoapi
+dependencies[] = tigoapps
+
+file[]=tol.admin.inc
+file[]=tol.pages.inc

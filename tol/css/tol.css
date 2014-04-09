@@ -1,0 +1,2506 @@
+/*-----------------------------------------------------
+* Mis Lineas 
+------------------------------------------------------- */
+/**
+* Static Page
+*/
+a,
+a:hover { text-decoration: none!important }
+
+.page-mis-lineas {
+    background:url(../images/mis_lineas/bg_section.gif) repeat-x top center;
+}
+
+.page-online #content{ float: left; width: 724px;}
+
+#prefooter {
+    margin: auto;
+    width: 976px;
+    clear: both;
+}
+
+.content-resumen-cuenta .box .box-items .amount{
+  font-weight:bold;
+  white-space: nowrap;
+  font-size:12px;
+}
+
+.page-mis-lineas #content { width:100%;}
+
+.block-tigo-redes-sociales {clear: both}
+
+#page {
+    padding: 0 0 25px;
+    overflow: hidden;
+}
+
+#breadcrumbs {
+    padding:0 0 5px;
+}
+
+.page-mis-lineas #page {
+    padding:0 0 20px; 
+    overflow: hidden;
+}
+
+/** Sidebar **/
+.visible {
+    display: none;
+}
+
+#sidebar-first {
+    width:232px;
+    float:left;
+    margin-right:14px;
+    background:#f2f2f2 url(../images/mis_lineas/bg_sidebar.png) no-repeat bottom left;
+    border-left:1px solid #e9e9e9;
+    border-radius: 0 0 5px 5px;
+    padding:0 0 300px 0;
+    border-bottom:1px solid #999;
+}
+
+#sidebar-first h2 {
+    height:45px;
+    background: url("../../tigo/tigo_menu/imagenes/menu-fondo.png") repeat-x center center;
+    border-radius: 5px 5px 0 0;
+    margin:0!important;
+    color:#FFF;
+    position: relative;
+    padding:15px 0 0 17px;
+    font-size:18px;
+    cursor: pointer;
+
+}
+
+#sidebar-first h2 span.arrow {
+    position: absolute;
+    top: 25px;
+    /*right:23px;*/ /* RVS 20130705 */
+    right:18px;
+    background: url(../images/mis_lineas/arrow_title.gif) no-repeat top left;
+    width:12px;
+    height: 9px;
+    cursor:pointer;
+}
+
+#sidebar-first h2.arrow-down span.arrow {
+    background: url(../images/mis_lineas/arrow_title.gif) no-repeat bottom left!important;
+}
+
+#sidebar-first h2 span.arrow-blue {
+    position: absolute;
+    top: 60px;
+    left:108px;
+    background: url(../images/mis_lineas/arrow_title2.png) no-repeat;
+    width:17px;
+    height: 9px;
+}
+
+#sidebar-first h2 span.dni {
+    font-size:12px;
+    display:block;
+}
+
+#sidebar-left #block-menu-menu-tigo-online {
+    clear:both;
+}
+
+#sidebar-first #block-menu-menu-tigo-online ul {
+    margin:0;
+    padding:0;
+}
+
+#sidebar-first #block-menu-menu-tigo-online ul li {
+    overflow: hidden;
+    border-bottom:1px solid #e9e9e9;
+    list-style: none;
+    border-right:1px solid #e9e9e9;
+    margin:0;
+}
+
+#sidebar-first #block-menu-menu-tigo-online ul li a {
+    color:#666;
+    display: block;
+    /*padding:15px 0 15px 18px;*/ /* RVS 20130705 */
+    padding:15px 0 15px 18px;
+}
+
+#sidebar-first #block-menu-menu-tigo-online ul li a:hover {
+    text-decoration:none;
+}
+
+#sidebar-first #block-menu-menu-tigo-online ul li.active-trail {
+    background:#FFF url(../images/mis_lineas/arrow_item.gif) no-repeat 207px 19px;
+    border-right:none;
+}
+/*
+#sidebar-first #block-menu-menu-tigo-online ul li.active-trail a {
+    color:#5060BA;
+}
+*/
+.menu li.leaf{
+  /* padding-left: 20px; */ /* RVS 20130705 */
+}
+
+#sidebar-first .menu.oculto { display: none;}
+
+
+#sidebar-first .menu-lineas ul {
+    margin: 0;
+    padding: 0;
+}
+
+
+#sidebar-first .menu-lineas ul li {
+    padding:15px 0 15px 18px;
+    background:#eceff8;
+    color:#666;
+    line-height:14px;
+    list-style: none;
+    border-bottom:1px solid #e0e0e0;
+}
+
+#sidebar-first .menu-lineas ul li span {
+    font-size:12px;
+}
+
+#sidebar-first .menu-lineas ul li.predeterminado {
+    color:#5060BA;
+    background: #eceff8 url(../images/mis_lineas/arrow_linea.gif) no-repeat 190px 23px;
+}
+
+/********* added 20130523 ******/
+#sidebar-first #block-menu-menu-tigo-online ul li.expanded { padding-right: 0!important}
+#sidebar-first #block-menu-menu-tigo-online ul li li a{ color:#666;}
+/*
+#sidebar-first #block-menu-menu-tigo-online ul li.active-items { background:#F2F2F2;border-bottom: 1px solid #E9E9E9;border-right: 1px solid #E9E9E9;}
+*/
+
+
+/********* added 20130529 ******/
+/*
+#sidebar-first #block-menu-menu-tigo-online ul li.active-items { background:#F2F2F2 url(../images/mis_lineas/arrow_down_gray.gif) no-repeat 200px 23px;border-bottom: 1px solid #E9E9E9;border-right: 1px solid #E9E9E9;}
+*/
+
+#sidebar-first #block-menu-menu-tigo-online ul li.active-items { background:#F2F2F2 url(../images/mis_lineas/arrow_down_gray.gif) no-repeat 200px 23px;border-bottom: 1px solid #E9E9E9; }
+
+/********* added 20130530 ******/
+#sidebar-first #block-menu-menu-tigo-online ul li.active-items a {
+    color: #666!important;
+}
+
+
+#block-menu-menu-tigo-online ul li.active-items li {
+    padding-left: 20px;
+    background: #FFF;
+/*    url(../images/mis_lineas/menu_subitem_line.gif) no-repeat 20px 27px; */
+}
+
+
+
+#sidebar-first .menu-lineas-buttons {background:#eceff8;padding:15px 0 15px 14px; overflow:hidden;}
+.menu-lineas-buttons div { float: left; margin: 0 6px 0 0}
+.menu-lineas-buttons .button-agregar a {
+    background: url(../images/mis_lineas/button_green_big.png) no-repeat center bottom;
+    width:100px;
+    height:31px;
+    text-align: center;
+    color:#FFF;
+    line-height: 29px;
+    display:block;
+    border-radius: 4px;
+}
+.menu-lineas-buttons .button-editar a {
+    background: url(../images/mis_lineas/button_gray_small2.png) no-repeat center bottom;
+    border-radius: 4px;
+    width:100px;
+    height:31px;
+    text-align: center;
+    color:#999;
+    line-height: 29px;
+    display:block;
+}
+
+/**
+* Messages
+*/
+.message {
+    height:31px;
+    line-height:31px;
+    border-radius: 5px;
+    padding:0 0 0 34px;
+    margin-bottom:13px;
+    font-size:14px;
+}
+
+.message.successful {
+    border:1px solid #17c100;
+    background:#eafee5 url(../images/mis_lineas/icon_ok.gif) no-repeat 10px 10px;
+    color:#17c100;
+}
+
+
+
+
+
+/**
+* Content mis lineas
+*/
+#content-wrapper {
+    width:700px; 
+    float: left;
+    padding: 0 0 0 24px;
+    font-family: "Trebuchet MS",Helvetica,sans-serif;
+}
+
+#content-wrapper h1 {
+    color:#5060BA;
+    line-height: 60px;
+    margin: 0!important;
+    font-weight:bold;
+}
+
+#content-wrapper #article {
+    padding:30px 0 0 0;
+    color:#666;
+
+}
+
+#content-wrapper #article .article-accion {
+    padding: 0 0 6px;
+    color:#5060BA;
+    font-size: 24px
+}
+
+#content-wrapper #article .article-description {
+    padding:0 0 19px;
+    font-size:13px;
+
+}
+
+
+#article-table {
+    width: 615px;
+    font-size:13px;
+    border:1px solid #e0e0e0;
+    border-radius:5px;
+    padding-bottom:15px;
+    font-weight:bold;
+}
+#article-table .row{
+    padding:8px 0 6px 0;
+    border-bottom:1px solid #e0e0e0;
+    overflow: hidden;
+}
+
+#article-table .row.predeterminado{
+    background:#eceff8;
+}
+
+#article-table .row div {
+    line-height: 27px;
+}
+
+#article #article-table .row .column-selected{
+    color:#5060BA;
+    float:left;
+    width:165px;
+    padding: 0 0 0 20px
+
+}
+#article #article-table .row .column-selected label {
+    font-weight:normal!important;
+}
+
+#article #article-table .row .column-user{
+    font-weight:bold;
+    float:left;
+    width:143px;
+    padding:0 10px 0 0;
+
+}
+
+#article #article-table .row .column-dni {
+    width:125px;
+    float: left;
+
+}
+
+#article #article-table .row .column-buttons{
+    float:left;
+    width:145px;
+}
+
+#article #article-table .row .column-buttons .button-editar{
+    float:left;
+    width: 72px;
+}
+
+#article #article-table .row .column-buttons .button-editar a {
+    background:url(../images/mis_lineas/button_gray_small.png) no-repeat 0 0;
+    width:60px;
+    height:30px;
+    line-height: 28px;
+    display: block;
+    text-align:center;
+    color:#999;
+}
+
+#article #article-table .row .column-buttons .button-editar a:hover {
+    text-decoration: none;
+}
+
+#article #article-table .row .column-buttons .button-eliminar{
+    float:left;
+    width:67px;
+}
+
+#article #article-table .row .column-buttons .button-eliminar a{
+    color:#999;
+}
+
+#article #article-table .row .column-buttons .button-eliminar a:hover {
+    text-decoration: none;
+}
+
+#article #article-table .row-last {
+    clear:both;
+    padding: 18px 0 0 0;
+    border-bottom:0;
+}
+
+#article #article-table .row-last .column-opcion-asociar{
+    padding: 0 0 0 26px;
+    width:436px;
+    float: left;
+}
+#article #article-table .row-last .column-opcion-asociar span {
+    display: block;
+    line-height:16px;
+}
+#article #article-table .row-last .column-opcion-asociar span.opcion-question {
+    color:#9bbb23;
+    font-weight:bold;
+}
+
+#article #article-table .row-last .column-opcion-asociar span.opcion-description {
+    font-size:11px;
+    font-weight:normal!important;
+}
+
+#article #article-table .row-last .column-button-asociar{
+    float:left;
+    width:136px;
+
+}
+#article #article-table .row-last .column-button-asociar a{
+    background: url(../images/mis_lineas/button_green_small.png) no-repeat;
+    width: 130px;
+    height:31px;
+    border:0;
+    cursor: pointer;
+    font-size:12px;
+    display: block;
+    color: #FFF; text-align: center;
+    font-weight: normal;
+}
+
+
+
+
+/**
+*  Resumen de tu cuenta
+*/
+.content-resumen-cuenta { padding: 0 0 0 14px}
+
+.content-resumen-cuenta .bar-status{
+    margin:0 0 30px 0;
+    background: #febb50;
+    color: #FFF;
+    border-radius:4px;
+    height: 37px;
+    line-height: 37px;
+}
+
+.content-resumen-cuenta .bar-status span.close {
+    float:right;
+    width: 32px;
+    text-align: center;
+    border-left:1px solid #FFF;
+}
+
+.content-resumen-cuenta .bar-status span.close a {
+    color:#FFF;
+    font-size: 22px;
+}
+
+.content-resumen-cuenta .bar-status span.pager {
+    float:left;
+    width: 40px;
+    text-align: center;
+    border-right:1px solid #FFF;
+    margin-right:10px;
+}
+
+.content-resumen-cuenta #blocks-user {
+    padding-bottom: 40px;
+    overflow: hidden;
+}
+.content-resumen-cuenta .box {
+    width:220px;
+    margin:0 17px 0 0;
+    border:1px solid #e0e0e0;
+    /*border-radius:5px;*/ /* RVS 20130705 */
+    border-radius:2px;
+    float:left;
+    background:#FFF url(../images/mis_lineas/bg_box.gif) repeat-x top left;
+    min-height:388px;
+    min-height: 405px;
+}
+
+.content-resumen-cuenta .box-last {
+    margin-right:0;
+}
+
+.content-resumen-cuenta .box .box-title {
+    color:#5060BA;
+    font-weight: bold;
+    padding: 11px;
+    line-height: 31px;
+    /* font-size: 26px; */  /* RVS 20130705 */
+    font-size: 22px;
+}
+
+.content-resumen-cuenta .box .box-title .detalle {
+    float: right;
+    background:url(../images/mis_lineas/button_gray_small.png) no-repeat 0 0;
+    width:60px;
+    height:30px;
+    line-height: 28px;
+    display: block;
+    text-align:center;
+    /*color:#999;*/
+    color:#282828;
+    font-size: 12px
+
+}
+
+.content-resumen-cuenta .box .box-valor {
+    font-size:39px;
+    padding:5px 0px 5px 0;
+    border-bottom:1px solid #c3c3c3;
+    /*margin:0 20px; */ /* RVS 20130705 */
+    margin:0 11px; 
+    color: #333;  /* RVS 20130705 */
+}
+
+.content-resumen-cuenta .box .box-valor .plan-subtitle{
+    font-size:14px; 
+     /*line-height: 14px;*/ /* RVS 20130705 */
+    line-height: 16px;
+}
+
+.content-resumen-cuenta .box .box-valor .plan-title{
+    /*font-size:16px;*/ /* RVS 20130705 */
+    font-size:15px;
+    
+    font-weight: bold;
+    /*line-height: 18px;*/ /* RVS 20130705 */
+    line-height: 16px;
+    /*min-height: 36px;*/ /* RVS 20130705 */
+    min-height: 28px;
+}
+
+.content-resumen-cuenta .box .box-update {
+    padding:9px 20px 9px 20px;
+    font-size: 10px;
+    font-style: italic;
+    color: #000000;
+}
+
+.content-resumen-cuenta .box .box-button {
+    margin: 0 20px 15px 20px;
+    min-height: 45px;
+}
+
+#tol-facturacion-pago-form input.form-submit,
+.content-resumen-cuenta .box .box-button a {
+    background: url("../images/mis_lineas/button_green_big.png") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    display: block;
+    height: 48px;
+    text-align: center;
+    width: 183px;
+    font-size: 20px;
+    border: none 0px;
+    line-height: 48px;
+    padding:0px 0px 5px 0;   
+    border-radius: 5px;
+    
+}
+
+.content-resumen-cuenta .box .box-items {
+    padding: 12px 0;
+    border-bottom:1px solid #e0e0e0;
+    color:#333;
+    /*font-size: 13px;*/ /* RVS 20130705 */
+    font-size: 12px;
+    font-weight:bold;
+}
+
+.content-resumen-cuenta .box .titulo-detalles {
+    color:#5060BA;
+    font-size: 16px;
+    margin:0 20px;
+}
+
+.content-resumen-cuenta .box .box-items-dates {margin:0 20px;}
+
+.content-resumen-cuenta .box .minutos { 
+    padding: 12px 0 12px 30px; 
+    background: url(../images/mis_lineas/icon_minutes.gif) no-repeat 1px 12px;
+    font-weight: bold;
+}
+
+.content-resumen-cuenta .box .sms {
+    padding: 12px 0 12px 30px;
+    background: url(../images/mis_lineas/icon_sms.gif) no-repeat 1px 12px;
+    font-weight: bold;
+}
+
+.content-resumen-cuenta .box .datos {
+    padding: 12px 0 12px 30px; 
+    border-bottom:0;
+    background: url(../images/mis_lineas/icon_dates.gif) no-repeat 1px 12px;
+    font-weight: bold;
+}
+
+#block-tol-todavia-tienes-dudas,
+#block-tol-que-puedo-hacer {
+    margin: 0 0 0 10px; 
+    overflow: hidden;
+}
+
+#block-tol-que-puedo-hacer { padding-bottom: 15px; border-bottom: 1px solid #e0e0e0;}
+
+#block-tol-que-puedo-hacer .resumen-subtitile {
+    border-bottom: 1px solid #DFDFDF;
+    clear: both;
+    color: #5060BA;
+    font-family: 'cronos-pro';
+    font-size: 30px;
+    margin: 0 0 10px;
+    padding: 0 0 5px;
+}
+
+#blocks-date {
+    clear: both;
+}
+
+#blocks-date .box-date {
+    float: left;
+    width: 163px;
+    margin-right:16px;
+}
+
+#blocks-date .box-date.box-last {
+    margin-right:0;
+}
+
+#blocks-date .box-date .box-date-title {
+    padding: 0 0 0 37px;
+    font-size: 20px;
+    color:#333;
+    font-weight: bold;
+    margin-bottom:15px;
+    height: 36px;
+    line-height: 36px
+}
+
+#blocks-date .box-date .box-date-title.saldo {
+    background: url(../images/mis_lineas/icon-dates-saldo.gif) no-repeat left center;
+}
+#blocks-date .box-date .box-date-title.facturacion {
+    background: url(../images/mis_lineas/icon-dates-facturacion.gif) no-repeat left center;
+}
+#blocks-date .box-date .box-date-title.linea {
+    background: url(../images/mis_lineas/icon-dates-linea.gif) no-repeat left center;
+}
+#blocks-date .box-date .box-date-title.comprar {
+    background: url(../images/mis_lineas/icon-dates-comprar.gif) no-repeat left center;
+}
+
+#blocks-date .box-date .box-date-enlace {
+    margin-bottom:8px;
+    clear: both;
+}
+
+#blocks-date .box-date .box-date-enlace a{
+    background: url(../images/mis_lineas/bg_button_gray.png) repeat-x;
+    border:1px solid #e0e0e0;
+    border-bottom:2px solid #b4b4b4;
+    border-radius:4px;
+    display:block;
+    width:161px;
+    height: 32px; 
+    text-align: center;
+    line-height: 31px;
+    color:#333;
+    font-size:13px;
+    font-weight:bold;
+}
+
+
+
+#todavia_tienes_dudas {
+    background: #f9f9f9 url(../images/mis_lineas/bg_block_todavia.jpg) no-repeat top right;
+    clear: both;
+    margin: 36px 0 0 0;
+    width: 638px;
+    border-radius: 5px;
+    border:1px solid #e0e0e0;
+    padding:22px 30px 25px 30px;
+    overflow: hidden; 
+}
+
+#todavia_tienes_dudas h2{
+    font-size: 30px;
+    margin:0; 
+    color: #5060BA;
+}
+
+#todavia_tienes_dudas .cols{
+    float: left;
+    width: 156px;
+    border-right: 1px solid #e0e0e0;
+    padding-right: 13px;
+    margin-right:13px;
+}
+
+#todavia_tienes_dudas .cols.last {
+    margin-right: 0;
+    padding-right: 0;
+    border-right: 0;
+}
+
+#todavia_tienes_dudas .cols .subtitle {
+    font-size: 14px;
+    padding-bottom: 5px;
+}
+
+#todavia_tienes_dudas .cols .text {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+
+
+/**
+* Facturacion
+*/
+.button-gray {
+    background: #FFF url(../images/mis_lineas/bg_button_gray.png) repeat-x bottom left;
+    border:1px solid #e0e0e0;
+    border-bottom:2px solid #b4b4b4;
+    border-radius:4px;
+    display:block;
+    text-align: center;
+    height: 30px;
+    color: #999;
+    line-height: 29px;
+}
+
+
+#ultima-factura {
+    width: 388px;
+    float: left;
+    border: 1px solid #e0e0e0;
+    border-radius:5px;
+    margin: 0 28px 0 0;
+    background: #FFF url("../images/mis_lineas/bg_box.gif") repeat-x  left top;
+    color:#333;
+}
+
+#ultima-factura .title{
+    padding: 9px 11px 9px 24px;
+    overflow: hidden;
+}
+
+#ultima-factura .title h3 {
+    float: left;
+    width: 192px;
+    color: #5060BA;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+#ultima-factura .title .download{
+    float: left;
+    margin-right:8px;
+    width: 74px;
+    font-size: 12px;
+    color: #333;
+}
+
+#ultima-factura .title .print{
+    float: left;
+    width: 74px;
+    font-size: 12px;
+    color: #333
+}
+
+#ultima-factura .valores {
+    clear: both;
+    padding: 23px 11px 1px 24px;
+    overflow: hidden;;
+}
+
+#ultima-factura .valores .pre-title{
+    clear: both;
+}
+
+#ultima-factura .valores .amount{
+    width: 220px;
+    font-size: 42px;
+    float: left;
+}
+
+#ultima-factura .valores .payment{
+    float: left;
+    background: url("../images/mis_lineas/button_green_big.png") no-repeat center center;
+    width: 133px;
+    height: 48px;
+    border: #e0e0e0;
+    border-radius: 5px;
+    /* line-height: 48px;*/
+    font-size: 20px;
+    color: #FFF;
+    text-align: center;
+    border-radius
+}
+
+#ultima-factura .post-title {
+    clear: both;
+    border-top: 1px solid #e0e0e0;
+    padding: 5px 0 13px 0;
+    font-size: 11px;
+    margin: 14px 11px 0 24px;
+}
+
+#ultima-factura .items {
+    clear: both;
+    padding: 0 11px 0 24px;
+    overflow: hidden;
+    background: #FFF;
+    margin-bottom:3px;
+}
+
+#ultima-factura .items ul {
+    margin: 0;
+    padding: 0;
+}
+#ultima-factura .items ul li {
+    border-bottom: 1px solid #e0e0e0;
+    overflow: hidden;
+    font-size: 14px
+}
+
+#ultima-factura .items ul li .label{
+    width: 170px;
+    height: 38px;
+    line-height: 38px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+#ultima-factura .items ul li .value{
+    width: 170px;
+    height: 38px;
+    line-height: 38px;
+}
+
+#ultima-factura .items ul li:last-child { border-bottom: 0}
+
+
+
+
+/** Datos Facturacion **/
+.clear {
+    clear: both;
+}
+#datos-facturacion {
+    float: left;
+    width: 280px;
+    border: 1px solid #e0e0e0;
+    border-radius:5px;
+}
+
+#datos-facturacion .title {
+    overflow: hidden;
+    padding: 6px 11px 9px 24px;
+    background: #FFF url("../images/mis_lineas/bg_box.gif") repeat-x  left top;
+    margin-top:3px;
+
+}
+
+#datos-facturacion .title h3{
+    float: left;
+    width: 182px;
+    color: #5060BA;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    line-height: 35px;
+}
+
+#datos-facturacion .title .editar {
+    float: right;
+    width: 74px;
+    font-size: 12px;
+    color: #333;
+    float: right;
+    width: 55px
+}
+
+#datos-facturacion .boxes {
+    padding: 17px;
+}
+
+#datos-facturacion .boxes .box {
+    clear: both;
+    border-top:1px solid #e0e0e0;
+}
+
+#datos-facturacion .boxes input {
+    float: left;
+    margin-right: 12px;
+}
+
+#datos-facturacion .boxes label {
+    float: left;
+    font-weight: bold;
+    /* line-height: 26px; */ /* RVS 20130705 */
+    line-height: 20px;
+}
+
+#datos-facturacion .boxes ul{
+    margin:0;
+    padding: 0;
+}
+
+#datos-facturacion .boxes ul li {
+    overflow: hidden;
+    font-size: 12px;
+    padding: 5px;
+}
+
+#datos-facturacion .boxes ul li .label{
+    width: 123px;
+    font-weight: bold;
+    display: inline-block;
+    color: #000000;
+}
+
+#datos-facturacion .boxes ul li .value {
+    width: 125px;
+}
+
+
+#datos-facturacion .boxes.factura-fisica {
+    border-top: 1px solid #e0e0e0;
+}
+
+
+/** Historial de facturacion **/
+#historial-facturacion {
+    clear: both;
+    margin: 63px 0 0 0;
+    border: 1px solid #e0e0e0;
+    border-radius:5px;
+}
+
+#historial-facturacion .title {
+    overflow: hidden;
+    padding: 6px 11px 9px 24px;
+    background: #FFF url("../images/mis_lineas/bg_box.gif") repeat-x  left top;
+    margin-top:3px;
+}
+
+#historial-facturacion .title h3 {
+    color: #5060BA;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    line-height: 35px;
+    width: 266px;
+    float: left;
+}
+
+#historial-facturacion .dates-calendar {
+    float: left;
+    width: 395px;
+}
+#historial-facturacion .dates-calendar .container-inline-date { float: left; width: 150px; clear: none!important}
+#historial-facturacion .dates-calendar .form-type-date-popup label { font-size: 10px; float: left; line-height: 28px}
+#historial-facturacion .dates-calendar .form-type-date-popup .description,
+#historial-facturacion .dates-calendar .form-type-date-popup div label{ display: none;}
+
+#historial-facturacion .dates-calendar .form-type-date-popup .date-padding { padding: 0!important; float: left;}
+#historial-facturacion .dates-calendar .form-type-date-popup div input {
+    width: 100px;
+    height: 28px;
+    background: #FFF url(../images/mis_lineas/bg_icon_date.gif) no-repeat 10px 40px ;
+ }
+
+#historial-facturacion .dates-calendar .form-submit { 
+    width: 16px;
+    height: 16px;
+    background: url(../images/mis_lineas/icon_historial.gif) no-repeat left top;
+    cursor: pointer;
+    border: 0;
+    float: left;
+    margin-left: 5px;
+    margin-top: 6px;
+    text-indent: -500em;
+    padding: 0!important;
+    border-radius: 0!important;
+    box-shadow: none!important;
+}
+
+#historial-facturacion .dates-calendar .form-submit + .form-submit { 
+    width: 16px;
+    height: 16px;
+    background: url(../images/mis_lineas/icon_historial.gif) no-repeat right top;
+
+}
+
+
+#historial-facturacion .order {
+    width: 100px;
+    float: left;
+}
+
+#historial-facturacion .table.row-header{
+    background:#dfdfdf;
+    color: #333;
+    padding:17px;
+    overflow: hidden;
+}
+
+#historial-facturacion .table.row-body {
+    margin: 0 17px;
+    padding: 9px 0;
+    border-bottom:1px solid #e0e0e0;
+    overflow: hidden;
+    clear: both;
+}
+
+#historial-facturacion .table .col{
+    float: left;
+}
+
+#historial-facturacion .table .col.col-periodo{
+    width: 450px;
+    line-height: 33px;
+}
+
+#historial-facturacion .table .col.col-periodo1{
+    width: 450px;
+    line-height: 33px;
+}
+
+#historial-facturacion .table .col.col-total{
+    width: 133px;
+    line-height: 33px;
+}
+
+#historial-facturacion .table .col.col-detalle{
+    width: 80px;
+    float:right; /********* added 20130528 ******/
+}
+
+#historial-facturacion .table .col.col-detalle a{
+    width: 74px;
+    font-size: 12px;
+    color: #333;
+    width: 55px;
+}
+
+
+
+
+/**
+*  Saldo
+*/
+
+.content-saldo {}
+
+#saldo-actual {
+    background: #333;
+    padding: 20px;
+    overflow: hidden;
+}
+
+#saldo-actual .saldo-datos{
+    float: left;
+    width:320px;
+    padding: 0 0 0 73px;
+    clear: #FFF;
+    background: url(../images/mis_lineas/icon_big_saldo.gif) no-repeat 0 15px;
+}
+
+#saldo-actual .saldo-datos .saldo-valor{
+    font-size: 48px;
+    color: #FFF
+}
+
+#saldo-actual .saldo-datos .saldo-update {
+    font-size:18px;
+    color: #8B8B8B;
+}
+
+#saldo-actual .saldo-buttons{
+    float: left;
+    width: 260px;
+    padding: 40px 0 0 0;
+}
+
+#saldo-actual .saldo-buttons a {
+        width: 120px;
+    height: 37px;
+    line-height: 37px;
+    display: block;
+    float: left;
+    font-size: 14px;
+}
+
+#saldo-actual .saldo-buttons a.button-green {
+    background: url("../images/mis_lineas/button_green_big.png") no-repeat scroll center center transparent;
+    border:1px solid #628000;
+    border-radius: 5px;
+    border-bottom:2px solid #628000;
+    margin-right: 15px;
+    color: #FFF;
+    text-align: center;
+    float: left;
+}
+
+
+.boxes-saldo {
+        position: relative;
+    margin: 30px 0 0 0;
+    clear: both;
+    border:1px solid #e0e0e0;
+    border-bottom:1px solid #b3b3b3;
+    overflow: hidden;
+}
+
+.boxes-saldo.minutes .item-cant{
+    background: url(../images/mis_lineas/icon_big_minutes.gif) no-repeat left center;
+}
+
+.boxes-saldo.sms .item-cant{
+    background: url(../images/mis_lineas/icon_big_sms.gif) no-repeat left center;
+}
+
+.boxes-saldo.datos .item-cant{
+    background: url(../images/mis_lineas/icon_big_dates.gif) no-repeat left center;
+}
+
+.boxes-saldo .box-left {
+    
+    float: left;
+    width: 267px;
+    width: 238px;
+    height: 142px;
+    overflow: hidden;
+    background: #EEE;
+    padding: 40px 20px 20000px 20px;
+    margin-bottom: -20000px;
+    min-height:155px;
+}
+
+.boxes-saldo .box-left .item-cant {
+    padding: 0 0 0 71px;
+    font-size: 40px;
+    line-height: 40px;
+    height: 45px;
+    color: #000000;
+}
+
+.boxes-saldo .box-left .item-avaliable {
+    padding: 0 0 0 71px;
+    font-size: 18px;
+}
+
+.boxes-saldo .box-left .item-button {
+    clear: both;
+    width: 180px;
+    margin: 38px auto 0 auto;
+}
+
+.boxes-saldo .box-left .item-button a {
+    width: 176px;
+    height: 34px;
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    color: #333;
+    line-height: 36px;
+}
+
+.boxes-saldo .box-right {
+    float: left;
+    width: 420px;
+}
+
+.boxes-saldo .box-right .row {
+    clear: both;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 14px 12px 12px 18px;
+    overflow: hidden;
+}
+
+.boxes-saldo .box-right .row.last {
+    border-bottom: 0;
+} 
+
+.boxes-saldo .box-right .row .col{
+    float: left;
+}
+
+.boxes-saldo .box-right .row .col.text {
+    width: 160px;
+    color: #000000;
+}
+
+.boxes-saldo .box-right .row .col.cant {
+    width: 140px;
+    margin-left: 40px;
+    color: #000000;
+}
+
+.boxes-saldo .box-right .row .col.cant span {
+    display: block;
+    color: #9b9b9b;
+}
+.boxes-saldo .box-right .row .col.button {
+    width: 88px;
+}
+
+.boxes-saldo .box-right .row .col.button a {
+    background: url("../images/mis_lineas/button_green_big.png") no-repeat scroll center center transparent;
+    border: medium none #E0E0E0;
+    border-radius: 2px;
+    border-bottom:2px solid #628000;
+    width: 85px;
+    height: 34px;
+    line-height: 34px;
+    display: block;
+    text-align: center;
+    color: #FFF
+}
+
+
+/** 
+* Mis Datos
+*/
+
+#mis-datos {
+    width: 414px;
+    border-radius: 4px;
+    border:1px solid #e0e0e0;
+    border-bottom:1px solid #b3b3b3;
+    padding: 18px;
+}
+
+#mis-datos .items {}
+
+#mis-datos .items ul li{
+    border-bottom: 1px solid #E0E0E0;
+    font-size: 14px;
+    overflow: hidden;
+    padding: 13px 0;
+}
+
+#mis-datos .items ul {
+    margin:0;
+    padding: 0;
+}
+
+#mis-datos .items ul li .label {
+    display: inline-block;
+    font-weight: bold;
+    width: 191px;
+}
+
+#mis-datos .items ul li .value {
+    width: 211px;
+}
+
+#mis-datos .items-buttons {
+    margin-top: 14px;
+    overflow: hidden;
+}
+
+#mis-datos .items-buttons a{
+    float: left;
+    color: #333;
+    font-weight: bold;
+}
+
+#mis-datos .items-buttons a.cambiar-datos {
+    width: 158px;
+    height: 47px;
+    line-height: 47px;
+    margin-right: 20px
+}
+
+#mis-datos .items-buttons a.cambiar-pass {
+    width: 232px;
+    height: 47px;
+    line-height: 47px;
+}
+
+
+/** 
+* Actualizar mis Datos
+*/
+.back {
+    float: left;
+    width: 71px;
+    height: 29px;
+    text-align: center;
+    background: #FFF;
+    border-radius:4px;
+    margin: 16px 12px 0 0;
+    color: #828282;
+    font-size: 12px;
+    border:1px solid #e0e0e0;
+    line-height: 29px;
+}
+
+.mis-datos-subtitle {
+    color: #5060BA;
+    font-size: 24px;
+    padding: 0 0 6px;
+    font-weight: bold;
+}
+
+
+#mis-datos-editar {
+    width: 535px;
+}
+
+#mis-datos-editar .items {}
+
+#mis-datos-editar form div > .form-item{
+    font-size: 14px;
+    overflow: hidden;
+    padding: 7px 0;
+    margin: 0;
+}
+
+#mis-datos-editar .items ul {
+    margin:0;
+    padding: 0;
+}
+
+#mis-datos-editar form div > .form-item label {
+    float:left;
+    font-weight: bold;
+    width: 182px;
+    color: #333;
+    line-height: 34px;
+}
+
+#mis-datos-editar form div > .form-item .form-select,
+#mis-datos-editar form div > .form-item .form-text {
+    float: left;
+}
+
+#mis-datos-editar form div > .form-item .form-text {
+    width:337px;
+    height: 34px;
+    border:1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 0 0 0 8px;
+    color: #969696;
+}
+
+#mis-datos-editar form div > .form-item .form-text-required {
+    width:337px;
+    height: 34px;
+    border:1px solid #B1B1B1;
+    border-radius: 4px;
+    padding: 0 0 0 8px;
+    color: graytext;
+}
+#mis-datos-editar form div > .form-item .form-select {
+    height: 33px;
+    padding-top: 5px;
+    width: 350px;
+    border:1px solid #E0E0E0;
+    color: #E0E0E0;
+    
+}
+#mis-datos-editar form div > .form-item .form-select-required {
+    height: 33px;
+    padding-top: 5px;
+    width: 350px;
+    border:1px solid #B1B1B1;
+    color: graytext;
+    
+}
+
+#mis-datos-editar .form-item-correo{
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 15px!important;
+    margin-bottom: 15px!important;
+}
+
+#mis-datos-editar input.form-send {
+    width: 116px;
+    height: 43px;
+    margin-right: 20px;
+    background: #FFF url(../images/mis_lineas/bg_button_gray.png) repeat-x bottom left;
+    border:1px solid #e0e0e0;
+    border-bottom:2px solid #b4b4b4;
+    border-radius:4px;
+    text-align: center;
+    color: #999;
+    margin-left:184px;
+    color: #666;
+}
+
+#mis-datos-editar input.form-cancelar {
+     line-height: 47px;
+     border:0;
+     background: none;
+     border-radius: 0;
+     color: #666;
+     box-shadow: 0!important;
+}
+
+
+
+/**
+* Facturacion Editar con fieldset
+*/
+
+#formulario_fieldset fieldset{
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    border-bottom:1px solid #999;
+    width: 456px;
+    margin:0 0 23px;
+    padding: 0;
+    position: relative;
+}
+
+#formulario_fieldset fieldset legend {
+    background: url("../images/mis_lineas/bg_box.gif") repeat-x scroll left top #FFFFFF;
+    margin-top: 3px;
+    overflow: hidden;
+    padding: 14px 11px 15px 24px;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    width: 92.4%;
+}
+
+#formulario_fieldset fieldset legend .fieldset-legend {
+    color: #5060BA;
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+#formulario_fieldset fieldset .fieldset-wrapper {
+    padding: 62px 20px 18px 20px;
+}
+
+#formulario_fieldset fieldset .fieldset-wrapper > .form-item {
+    font-size: 14px;
+    overflow: hidden;
+    padding: 7px 0;
+    margin: 0;
+}
+
+#formulario_fieldset fieldset .fieldset-wrapper > .form-item > label {
+    float:left;
+    font-weight: bold;
+    width: 182px;
+    color: #333;
+    line-height: 34px
+}
+
+#formulario_fieldset fieldset .fieldset-wrapper > .form-item > .form-select,
+#formulario_fieldset fieldset .fieldset-wrapper > .form-item > .form-radios{
+    width: 233px;
+    font-size: 14px;
+    float: left;
+}
+
+#tol-facturacion-form .form-item-formato{
+    margin-right:5px;
+}
+
+#formulario_fieldset fieldset .fieldset-wrapper > .form-item > .form-radios .form-item {
+    float: left;
+    
+    
+}
+
+#formulario_fieldset fieldset .fieldset-wrapper > .form-item > input.form-text {
+    width:218px;
+    height: 34px;
+    border:1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 0 0 0 8px;
+    color: #969696;
+    float: left;
+}
+
+#formulario_fieldset input.form-send {
+    width: 116px;
+    height: 43px;
+    line-height: 43px;
+    margin-right: 20px;
+    background: #FFF url(../images/mis_lineas/bg_button_gray.png) repeat-x bottom left;
+    border:1px solid #e0e0e0;
+    border-bottom:2px solid #b4b4b4;
+    border-radius:4px;
+    text-align: center;
+    color: #999;
+    margin-left:200px;
+    color: #666;
+}
+
+#mis-datos-editar input.form-cancel,
+#formulario_fieldset input.form-cancel {
+     width: 116px;
+    height: 43px;
+    margin-right: 20px;
+    background: #FFF url(../images/mis_lineas/bg_button_gray.png) repeat-x bottom left;
+    border:1px solid #e0e0e0;
+    border-bottom:2px solid #b4b4b4;
+    border-radius:4px;
+    text-align: center;
+    color: #999;
+    margin-left:8px;
+    color: #666;
+   
+}
+
+
+/**
+* Modal color box
+*/
+
+/* Editar Documento */
+/*
+#modal {
+    width: 500px;
+    float: left;
+    padding: 20px;
+}
+*/
+
+.asociar-linea h2,
+.segunda-contrasena h2,
+.codigo-seguridad h2,
+.documento h2 {
+    color: #5060BA;
+    font-weight: bold;
+    font-size: 22px;
+    margin: 10px 0 12px 10px;
+    padding: 0;
+}
+
+.asociar-linea .modal-subtitle,
+.segunda-contrasena .modal-subtitle,
+.codigo-seguridad .modal-subtitle,
+.documento .modal-subtitle {
+    padding: 0 0 17px 0;
+    border-bottom: 1px solid #e0e0e0;
+    color: #666;
+    font-size: 13px;
+    margin-bottom:13px;
+    margin-left:10px;
+    margin-right: 10px;
+}
+
+.documento .modal-subtitle a{
+    font-weight: bold;
+    color: #656565;
+    text-decoration: underline!important;
+}
+
+#modal #formulario  #form-content{
+    padding: 18px 0;
+    overflow: hidden;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 22px;
+}
+
+.documento #formulario form > div > .form-item{
+    font-size: 14px;
+    overflow: hidden;
+    padding:0 0 8px 0;
+    margin: 0;
+}
+
+.documento #formulario form > div > .form-item > label {
+    color: #333;
+    float: left;
+    font-size: 14px;
+    line-height: 34px;
+}
+
+.documento #formulario form > div > .form-item > label {
+    width: 170px;
+}
+
+.documento #formulario .container-inline,
+.documento #formulario .form-radios,
+.documento #formulario .form-select {
+    width: 327px;
+    float: left;
+}
+
+.documento #formulario .container-inline .form-item{
+    width: 97px;
+    float: left;
+    margin: 0;
+}
+
+.documento #formulario select {
+    height: 33px;
+    padding-top:6px;
+}
+
+.documento #formulario .container-inline .form-item label {
+    display: none;
+}
+.documento #formulario .container-inline .form-item { margin-right: 10px}
+#modal #formulario .container-inline .form-item select {
+     height: 33px;
+     padding-top: 6px;
+}
+
+.documento #formulario .container-inline .form-item select {
+    width: 96px;
+}
+
+#modal #formulario input.form-text {
+    height: 34px;
+    border:1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 0 0 0 8px;
+    color: #969696;
+    float: left;
+    margin-bottom: 4px;
+}
+
+.documento #formulario input.form-text {
+    width: 316px;
+}
+
+.documento #formulario .form-item-fecha-expedicion {
+    margin-bottom: 15px!important;
+    padding-bottom: 15px!important;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+
+#modal #formulario form div > input.form-submit {
+    
+    height: 43px;
+    background: #FFF url(../images/mis_lineas/bg_button_gray.png) repeat-x bottom left;
+    border:1px solid #e0e0e0;
+    border-bottom:2px solid #b4b4b4;
+    border-radius:4px;
+    text-align: center;
+    color: #333;
+    float: right;
+    font-size: 18px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    
+    /*margin-bottom: 35px!important;*/
+}
+
+
+
+
+/** Asociar Linea *
+.asociar-linea {
+    width: 321px!important;
+}
+*/
+
+#tol-asociar-linea-form .form-item-line {
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom:15px;
+    padding-bottom: 15px
+}
+
+#tol-asociar-linea-form .form-item-terms {
+    float: left;
+    width: 188px;
+    color:#c2c2c2;
+    font-size: 9px;
+    padding-top:4px; 
+}
+
+#tol-asociar-linea-form .form-item-terms .ez-checkbox {
+    float: left;
+    height: 18px;
+}
+#tol-asociar-linea-form .form-item-terms label {
+    font-size: 9px!important;
+    width: 162px!important;
+    line-height: 20px!important;
+}
+
+#tol-asociar-linea-form .form-item-terms input {
+    float: left;
+}
+
+#tol-asociar-linea-form div > .form-item {
+    clear: both;
+    overflow: hidden;
+}
+
+#tol-asociar-linea-form .form-text {
+    width: 166px;
+    height: 34px;
+    border:1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 0 0 0 8px;
+    color: #969696;
+    float: left;
+}
+
+#modal #formulario .form-buttons .button-check label {
+    line-height: 24px;
+}
+
+#modal #formulario .form-buttons .button-check input {
+    float: left;
+}
+
+
+/** preguntas **/
+.preguntas {
+    width: 667px!important;
+}
+
+.preguntas h2 {
+    color: #5060BA;
+    font-weight: bold;
+    font-size: 22px;
+    margin: 0 0 12px 0;
+    margin:0 0 8px 0;
+}
+
+.preguntas .modal-subtitle {
+    border-bottom: 0;
+    margin-bottom:9px;
+    padding: 0 0 17px 0;
+    color: #666;
+    font-size: 13px;
+}
+
+.preguntas #formulario .form-type-radios > label {
+    padding: 9px 0 18px 9px;
+    width: 100%!important
+}
+
+
+.preguntas #tol-preguntas-form > div > .form-item {
+    width: 315px;
+    float: left;
+    border-top: 1px solid #e0e0e0;
+}
+
+.form-item-pregunta1,
+.form-item-pregunta2,
+.form-item-pregunta3,
+.form-item-pregunta4 {
+    color: #333;
+}
+
+.form-item-pregunta1,
+.form-item-pregunta3 {
+    margin-right: 37px!important;
+}
+
+#tol-preguntas-form .form-radios {
+    clear: both;
+    padding-bottom: 15px!important;
+}
+
+#tol-preguntas-form .form-radios .form-type-radio {
+    padding-bottom: 5px;
+}
+
+#tol-preguntas-form .form-radios .form-type-radio .ez-radio {
+    float: left;
+}
+
+#tol-preguntas-form .form-radios input{
+    float: left;
+    margin-right: 10px;
+    line-height: 20px;
+    margin-top: 0;
+}
+
+#tol-preguntas-form .form-radios label {
+    font-size: 13px!important;
+}
+
+
+/** Codigo de Seguridad **/
+.codigo-seguridad .modal-subtitle {
+    padding-bottom:22px; 
+}
+
+.codigo-seguridad .modal-subtitle a {
+    color: #333;
+    text-decoration: underline!important;
+}
+
+#tol-asociar-linea-form .form-text,
+#tol-codigo-seguridad-form .form-text {
+    width: 166px;
+    height: 34px;
+    border:1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 0 0 0 8px;
+    color: #969696;
+    float: left;
+}
+
+#tol-asociar-linea-form label,
+#tol-codigo-seguridad-form label {
+    font-size: 14px;
+    width: 165px;
+    color: #333;
+    float: left;
+    line-height: 34px;
+    font-weight: normal; 
+}
+
+
+#tol-codigo-seguridad-form .form-item-codigo-seguridad{
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 18px;
+    margin-bottom: 25px;
+    overflow: hidden;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+/** Segunda contrasena **/
+
+
+#tol-segunda-contrasena-form .form-item-repetir-contrasena{
+    overflow: hidden;;
+    padding: 0 0 15px;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+}
+
+#tol-segunda-contrasena-form div > .form-item {
+    clear: both;
+    overflow: hidden;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#tol-segunda-contrasena-form .form-text {
+    width: 166px;
+    height: 34px;
+    border:1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 0 0 0 8px;
+    color: #969696;
+    float: left;
+}
+
+#tol-segunda-contrasena-form label {
+    font-size: 14px;
+    width: 150px;
+    color: #333;
+    float: left;
+    line-height: 34px;
+    font-weight: normal; 
+    margin-left: 10px;
+}
+
+#tol-segunda-contrasena-form .form-item-codigo-seguridad{
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 24px;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+
+
+/** factura detalle **/
+#detalle-factura {
+    border: 1px solid #E0E0E0;
+    border-radius: 5px 5px 5px 5px;
+    color: #333333;
+    float: left;
+    margin: 0 28px 0 0;
+    width: 695px;
+}
+
+#detalle-factura .title {
+    background: url("../images/mis_lineas/bg_box.gif") repeat-x scroll left top #FFFFFF;
+    overflow: hidden;
+    padding: 9px 0 7px 21px;
+}
+
+#detalle-factura .title h2 {
+    color: #5060BA;
+    float: left;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    /**width: 503px;**/
+    width: 280px;
+}
+
+#detalle-factura .title a{
+    color: #333333;
+    float: left;
+    font-size: 12px;
+    margin-right: 8px;
+    width: 74px;
+}
+
+#detalle-factura .article-content{
+
+}
+
+#detalle-factura .article-content .col-left{
+    width: 270px;
+    float: left;
+    background: #eee url(../images/mis_lineas/bg_box_detalle.png) repeat-y top right;
+    padding: 15px;
+}
+
+#detalle-factura .article-content .col-left .total{
+    padding: 0 0 5px 0;
+    font-size: 13px;
+    color: #333;
+}
+
+#detalle-factura .article-content .col-left .price{
+    font-size: 42px;
+    padding: 0 0 5px 0;
+    color: #333;
+    /*font-weight: bold;*/ /* RVS 20130705 */
+}
+
+#detalle-factura .article-content .col-left .update{
+    font-size: 10px;
+    padding: 0 0 13px;
+    border-bottom: 1px solid #e0e0e0;
+    margin:0;
+    overflow: hidden;
+}
+
+#detalle-factura .article-content .col-left .detalles-factura{
+
+}
+
+#detalle-factura .article-content .col-left .detalles-factura ul {
+    margin: 0;
+    padding: 0;
+}
+
+#detalle-factura .article-content .col-left .detalles-factura ul li {
+    padding: 13px 0;
+    border-bottom: 1px solid #e0e0e0;
+    list-style: none;
+    overflow: hidden;
+}
+
+#detalle-factura .article-content .col-left .detalles-factura ul li .label {
+    display: inline-block;
+    width: 121px;
+    color: #333;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#detalle-factura .article-content .col-left .detalles-factura ul li .value {
+    font-size: 12px;
+}
+
+
+#detalle-factura .article-content .col-right {
+    width: 350px;
+    padding: 27px 0 15px 22px;
+    float: left;
+    overflow: hidden;
+}
+
+#detalle-factura .article-content .col-right .titulo-targeta {
+    padding: 0 0 18px;
+    font-size: 18px;
+    color: #333;
+}
+
+#detalle-factura .article-content .col-right #formulario-pago > form > div > .form-item{
+    clear: both;
+    overflow: hidden;
+    padding: 0 0 8px 0;
+    margin: 0;
+}
+
+#detalle-factura .article-content .col-right #formulario-pago  label  {
+    width: 118px;
+    line-height: 36px;
+    font-size: 13px;
+    font-weight: bold;
+    float: left;
+    text-align: right;
+    padding: 0 17px 0 0
+}
+
+#detalle-factura .article-content .col-right #formulario-pago .form-text {
+    width: 190px;
+    float: left;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px 4px 4px 4px;
+    color: #969696;
+    height: 34px;
+    padding: 0 0 0 8px;
+}
+
+#detalle-factura .article-content .col-right #formulario-pago .container-inline{
+    width: 200px!important;
+    float: left;
+}
+
+#detalle-factura .article-content .col-right #formulario-pago .container-inline > .form-item {
+    float: left;
+    width: 78px; margin-right:5px;
+    margin: 0!important
+}
+
+#detalle-factura .article-content .col-right #formulario-pago .form-item-codigo-seguridad .form-text{
+    width: 145px;
+}
+
+#detalle-factura .article-content .col-right #formulario-pago .form-item-codigo-seguridad span {
+    width: 38px;
+    height: 27px;
+    background: url(../images/mis_lineas/icon_target.gif) no-repeat;
+    float: left;
+    margin: 4px
+}
+
+#detalle-factura .article-content .col-right #formulario-pago .form-submit {
+    margin-left: 136px;
+    width: 180px;
+    height: 46px;
+    background: url("../images/mis_lineas/button_green_big.png") no-repeat scroll center center transparent;
+    border: medium none #E0E0E0;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    float: left;
+    font-size: 20px;
+    line-height: 48px;
+    text-align: center;
+}
+
+
+
+/*** Linea Detalle ***/
+
+/* Mi Equipo */
+#mi-equipo  {
+    width: 460px;
+    float: left;
+    margin-bottom: 40px;
+}
+
+#detalle-cuenta h2,
+#mi-equipo h2 {
+    color: #5060BA;
+    font-size: 24px;
+    margin-top: 0;
+    padding: 0;
+}
+
+#detalle-cuenta .subtitle,
+#mi-equipo .subtitle{
+    padding: 0 0 23px;
+    font-size: 13px;
+}
+
+
+#mi-equipo #block-equipo {
+    padding: 15px;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    border-bottom:1px solid #b3b3b3;
+    color: #333333;
+    overflow: hidden;
+}
+
+#mi-equipo #block-equipo .movil-image{
+    width: 170px;
+    float: left;
+    text-align: center;
+}
+
+#mi-equipo #block-equipo .equipo-detalles {
+    width: 243px;
+    float: left;
+}
+
+#mi-equipo #block-equipo .equipo-detalles ul{
+    margin: 0;
+    padding: 0
+}
+
+#mi-equipo #block-equipo .equipo-detalles ul li {
+    list-style: none;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 14px;
+}
+
+#mi-equipo #block-equipo .equipo-detalles ul li:last-child {
+    border-bottom: 0;
+}
+
+#mi-equipo #block-equipo .equipo-detalles ul li .label {
+    width: 64px;
+    float: left;
+    display: inline-block;
+    font-weight: bold;
+}
+
+#mi-equipo #block-equipo .equipo-detalles ul.mas-items li .label {
+    width: 113px!important;
+}
+
+#mi-equipo #block-equipo .equipo-detalles .button-bloquear {
+    width: 198px;
+    height: 46px;
+    line-height: 46px;
+}
+
+#mi-equipo #block-equipo .equipo-detalles .button-bloquear a {
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    height: 43px;
+    line-height: 45px;
+}
+
+#mi-equipo #block-equipo .equipo-detalles .title-seguro {
+    padding: 20px 0 10px 0;
+    color: #5060BA;
+    font-size: 16px;
+}
+
+
+
+/* Infor Personal */
+#info-personal {
+    width: 230px;
+    float: right;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    border-bottom:1px solid #b3b3b3;
+    color: #333333;
+}
+
+#info-personal .title {
+    overflow: hidden;
+    padding: 6px 11px 9px 24px;
+    background: #FFF url("../images/mis_lineas/bg_box.gif") repeat-x  left top;
+    margin-top:3px;
+
+}
+
+#info-personal .title h3{
+    float: left;
+    width: 134px;
+    color: #5060BA;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    line-height: 35px;
+}
+
+#info-personal .title .editar {
+    float: right;
+    width: 74px;
+    font-size: 12px;
+    color: #333;
+    float: right;
+    width: 55px
+}
+
+
+#info-personal ul{
+    margin: 0;
+    padding: 10px
+}
+
+#info-personal ul li {
+    list-style: none;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 14px;
+}
+
+#info-personal ul li:last-child {
+    border-bottom: 0;
+}
+
+#info-personal ul li .label {
+    width: 64px;
+    float: left;
+    font-weight: bold;
+    font-weight: bold;
+}
+
+#info-personal ul li .value {
+    color:#999;
+    display: block;
+    clear: both;
+}
+
+
+
+
+
+
+/* detalle de la cuenta */
+#detalle-cuenta {
+
+    /*
+    clear: both;
+    width: 415px;
+        */
+        
+        /********* added 20130601 ******/    
+        width: 460px;
+
+}
+
+#detalle-cuenta ul {
+    /*
+    width: 455px;
+    */
+    /********* added 20130601 ******/    
+    width: 415px;
+    
+    padding: 15px 0;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    border-bottom:1px solid #b3b3b3;
+    color: #333333;
+    padding:10px 25px 30px 25px;
+
+}
+
+#detalle-cuenta ul li {
+    list-style: none;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 14px;
+    height: 18px;
+}
+
+#detalle-cuenta ul li:last-child {
+    border-bottom: 0;
+}
+
+#detalle-cuenta ul li .label {
+    width: 168px;
+    float: left;
+    display: inline-block;
+    font-weight: bold;
+}
+
+#detalle-cuenta ul li .value2 {
+    color: #56BC57;
+    font-weight: bold;
+}
+#detalle-cuenta ul li .value3 {
+    color: #FF0000;
+    font-weight: bold;
+}
+
+#detalle-cuenta ul li a {
+    width: 198px;
+    height: 43px;
+    line-height: 42px;
+    /*
+    font-size: 20px;
+    */
+    /********* added 20130601 ******/    
+    font-size: 16px;
+    
+    color: #333;
+    font-weight: bold;
+}
+
+
+
+
+
+
+/* Used for the Switch effect: */
+    .cb-enable, .cb-disable, .cb-enable span, .cb-disable span { background: url(switch.gif) repeat-x; display: block; float: left; }
+    .cb-enable span, .cb-disable span { line-height: 30px; display: block; background-repeat: no-repeat; font-weight: bold; }
+    .cb-enable span { background-position: left -90px; padding: 0 10px; }
+    .cb-disable span { background-position: right -180px;padding: 0 10px; }
+    .cb-disable.selected { background-position: 0 -30px; }
+    .cb-disable.selected span { background-position: right -210px; color: #fff; }
+    .cb-enable.selected { background-position: 0 -60px; }
+    .cb-enable.selected span { background-position: left -150px; color: #fff; }
+    .switch label { cursor: pointer; }
+    
+    
+    
+    
+    
+#article-table .row .row-edit {
+    clear: both;
+    display: none;
+}
+
+.mostrar-form .row-edit {
+    display: block!important;
+}
+
+.mostrar-form .row-edit .form-type-textfield { 
+    float: left;
+    margin: 0 15px 0 180px!important;
+
+}
+
+.mostrar-form .row-edit .form-type-textfield .form-text {
+    border: 1px solid #E0E0E0;
+    border-radius: 4px 4px 4px 4px;
+    color: #969696;
+    float: left;
+    height: 32px;
+    padding: 0 0 0 8px;
+    width: 132px;
+}
+
+.mostrar-form .row-edit .linea_numero {
+    float: left;
+    width: 125px;
+}
+
+.mostrar-form .row-edit .form-send {
+    float: left;
+    background: url("../images/mis_lineas/button_green_big.png") no-repeat scroll center center transparent;
+    border: 0 none;
+    border-radius: 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+    height: 31px;
+    text-align: center;
+    width: 60px;
+    padding: 0;
+}
+
+.mostrar-form .row-edit .form-cancel {
+    float: left;
+    background: none!important;
+    border: 0 none;
+    color: #999;
+    cursor: pointer;
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+    height: 31px;
+    text-align: center;
+    width: 67px;
+    padding: 0;
+    box-shadow: none!important
+    
+}
+
+
+.boxes-saldo .box-right .row .row-update {
+    clear: both;
+    font-size: 10px;
+}
+
+/********* added 20130514 ******/
+
+/** Linea Active **/
+#article #article-table .row .column-selected{
+    position: relative;
+}
+#article #article-table .row .column-selected .active-linea {
+    position: absolute;
+    left: 23px;
+    top: 4px;
+    width: 20px;
+    height: 20px;
+    display: block;
+    text-indent: -500em;
+    cursor: pointer;
+}
+/*
+input.form-submit { padding: 0 !important }
+*/
+/** BLock que puedo hacer ? /online */
+#blocks-date .box-date ul {
+    margin: 0;
+    padding: 0
+}
+
+#blocks-date .box-date ul li {
+        margin-left: 0;
+        list-style:none; margin-bottom:6px;
+    padding: 0
+}
+
+#blocks-date .box-date ul li a{
+    background: url(../images/mis_lineas/bg_button_gray.png) repeat-x;
+    border:1px solid #e0e0e0;
+    border-bottom:2px solid #b4b4b4;
+    border-radius:4px;
+    display:block;
+    width:161px;
+    height: 32px; 
+    text-align: center;
+    line-height: 31px;
+    color:#333;
+    font-size:13px;
+    font-weight:bold;
+}
+
+/********* added 20130521 ******/
+
+#formulario-pago #edit-fecha-vencimiento {}
+
+#formulario-pago #edit-fecha-vencimiento > .form-type-select { width: 66px!important;background: url(../images/mis_lineas/icn_selects.gif) no-repeat 48px top;}
+
+#formulario-pago #edit-fecha-vencimiento > .form-type-select .form-select { width: 61px;}
+
+#formulario-pago #edit-fecha-vencimiento > .form-type-select label {display:none!important}
+
+#formulario-pago #edit-fecha-vencimiento > .form-type-select span { width: 50px!important; background: none!important}
+
+/********* added 20130528 ******/
+
+/** Button online facturacion detalle **/
+.button-form-submit {
+    background: url("../images/mis_lineas/button_green_big.png") no-repeat scroll center center transparent;
+    border: medium none #E0E0E0;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    float: left;
+    font-size: 20px;
+    height: 46px;
+    line-height: 48px;
+    text-align: center;
+    width: 180px;
+    cursor: pointer;
+    display: block;
+}
+
+
+/********* added 20130529 ******/
+
+/** Agregar linea validacion **/
+.validacion {
+    width: 531px!important;
+}
+#tol-linea-detalle-validacion-form label{
+    width: 170px;
+    padding-right: 10px;
+    float: left;
+    font-size: 14px;
+    line-height: 33px;
+}
+
+#tol-linea-detalle-validacion-form .form-item {
+    overflow: hidden;
+}
+
+#tol-linea-detalle-validacion-form input.form-text{
+    float: left;
+    width: 340px;
+}
+#tol-linea-detalle-validacion-form .form-cancel {
+    border: 0!important;
+    box-shadow: none!important;
+    float: left!important;
+    background: none!important;
+}
+#tol-linea-detalle-validacion-form .form-send {
+    background: url(../images/mis_lineas/button_green_big.png) no-repeat 0 0!important;
+    color: #FFF!important;
+    float: right!important;
+    border-bottom: 2px solid #627E05!important;
+}
+
+/********* added 20130529 ******/
+
+/** Background buttons forms **/
+#tol-linea-bloquear-equipo-form {
+    width: 272px;
+}
+#tol-linea-bloquear-linea-form input.form-send,
+#tol-linea-bloquear-equipo-form input.form-submit {
+    background: url(../images/mis_lineas/button_green_big.png) no-repeat 0 0!important;
+    color: #FFF!important;
+    float: left!important;
+    border-bottom: 2px solid #627E05!important;
+}
+
+#tol-linea-bloquear-linea-form input.form-cancel {
+    border: 0!important;
+    background: none!important;
+    float: left!important;
+ }
+
+/********* added 20130708 ******/
+#tol-into-segunda-contrasena-form div > .form-item {
+        clear: both;
+        overflow: hidden;
+        margin-left: 10px;
+        padding-bottom: 15px;
+
+}
+
+#tol-into-segunda-contrasena-form .form-item-segunda-contrasena {
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom:15px;
+    padding-bottom: 15px
+    margin-left: 10px;
+    margin-right: 10px;
+}

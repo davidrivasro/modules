@@ -1,0 +1,19 @@
+name = "Premium buy Sms"
+description = "Buy premium content sms"
+package = "Features"
+
+dependencies[] = "premium"
+dependencies[] = "sms"
+
+files[] = "premium_buy_sms.info"
+files[] = "premium_buy_sms.module"
+files[] = "premium_buy_sms.tpl.php"
+files[] = "premium_buy_sms_link.module"
+
+
+
+core = 7.x
+files[] = premium_buy_sms.module
+files[] = premium_buy_sms.install
+files[] = premium_buy_sms.tpl.php
+configure = admin/config/services/premium_buy_sms

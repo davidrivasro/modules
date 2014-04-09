@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * Implements hook_block_info().
+ */
+function custom_twitter_block_info() {
+  $blocks['tweets'] = array(
+    'info' => t('Custom Twitter'), //The name that will appear in the block list.
+    'cache' => DRUPAL_NO_CACHE, //Default
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function custom_twitter_block_view($delta = '') {
+  switch($delta){
+    case 'tweets':
+      $block['subject'] = '';
+      $block['content'] = _custom_twitter_content();
+  }
+
+  return $block;
+}
+
+function _custom_twitter_content(){
+  drupal_add_js(drupal_get_path('module', 'custom_twitter')."/jTweetsAnywhere/jquery.jtweetsanywhere-1.3.1.min.js");
+  drupal_add_js(drupal_get_path('module', 'custom_twitter')."/js/custom_twitter.js");
+  drupal_add_css(drupal_get_path('module', 'custom_twitter')."/jTweetsAnywhere/jquery.jtweetsanywhere-1.3.1.css");
+
+  return '<div id="tweetFeed"></div>';
+}

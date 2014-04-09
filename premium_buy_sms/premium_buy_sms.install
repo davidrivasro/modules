@@ -1,0 +1,10 @@
+<?php
+	/**
+	* Implements hook_uninstall()
+	*/
+	function premium_buy_sms_uninstall()
+	{
+		variable_del('premium_buy_sms_prefix');
+		variable_del('premium_buy_sms_types');
+	}
+	

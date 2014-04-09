@@ -1,0 +1,5 @@
+name = Aguila Youtube
+description = Show the Youtube Channel of Aguila in a Block, implements the Youtube API
+core = 7.x
+version = 7.x-0.1
+package = Aguila

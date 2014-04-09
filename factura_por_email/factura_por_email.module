@@ -1,0 +1,275 @@
+<?php
+/*
+ * SummaSolutions.net
+ */
+
+/*
+ * define pager limit
+ */
+define('FACTURA_POR_EMAIL_REPORTS_PAGER_LIMIT', 50);
+
+// A registry of helpers and variable_get defaults.
+require_once (dirname(__FILE__) . '/includes/factura_por_email.helpers.inc');
+
+// Integration with tigo online api services.
+require_once (dirname(__FILE__) . '/includes/factura_por_email.tigo_ws.inc');
+
+// A registry of forms, hook_validate and hook_submit functions
+require_once (dirname(__FILE__) . '/includes/factura_por_email.forms.inc');
+
+/*
+ * Hook init
+ */
+function factura_por_email_init(){
+    // pago_express module is not a dependency of factura_por_email
+    // but already includes a plugin needed by this module
+    if(!module_exists('pago_express')){
+        // module path
+        $path = drupal_get_path('module', 'factura_por_email');
+        // load fancybox plugin if pago_express module is not present
+        // (pago_express module already load the fancybox plugin)
+        drupal_add_js($path . '/js/jquery.fancybox.pack.js', 'file');
+        // load css for fancybox plugin if pago_express module is not present
+        drupal_add_css($path . '/css/factura_por_email.css', array('group' => CSS_DEFAULT, 'type' => 'file'));
+    }
+}
+
+/*
+ * Hook menu
+ */
+function factura_por_email_menu(){
+    $items = array();
+
+    // factura_por_email module configuration
+    $items['admin/config/tigo-online/factura_por_email'] = array(
+        'title' => 'Subscripcion a factura por correo electronico',
+        'description' => 'Configure las opciones del modulo.',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('factura_por_email_admin'),
+        'access arguments' => array('administer site configuration'),
+        'file' => 'includes/factura_por_email.admin.inc',
+        'type' => MENU_NORMAL_ITEM,
+        'weight' => 11,
+    );
+
+    // factura_por_email module reports
+    $items['admin/reports/factura_por_email'] = array(
+        'title' => 'Factura por email Reports',
+        'description' => 'Electronic Invoice Status Report.',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('factura_por_email_reports'),
+        'access arguments' => array('administer site configuration'),
+        'file' => 'includes/factura_por_email.reports.inc',
+        'type' => MENU_NORMAL_ITEM,
+        'weight' => 21,
+    );
+
+    // Use case factura_por_email step1
+    $factura_por_email_page = variable_get('factura_por_email_page', 'factura-por-email');
+    $items[$factura_por_email_page] = array(
+        'menu_name' => "factura_por_email",
+        'description' => 'Permite subscribir a factura electrónica',
+        'page callback' => 'factura_por_email_page',
+        'access callback' => true,
+        'type' => MENU_VISIBLE_IN_BREADCRUMB,
+    );
+
+    $items[$factura_por_email_page . '/token'] = array(
+        'menu_name' => "factura_por_email",
+        'description' => 'Permite subscribir a factura electrónica',
+        'page callback' => 'factura_por_email_token_page',
+        'access callback' => true,
+        'type' => MENU_VISIBLE_IN_BREADCRUMB,
+    );
+
+    $items[$factura_por_email_page . '/error'] = array(
+        'menu_name' => "factura_por_email",
+        'description' => 'Permite subscribir a factura electrónica',
+        'page callback' => 'factura_por_email_error_page',
+        'access callback' => true,
+        'type' => MENU_VISIBLE_IN_BREADCRUMB,
+    );
+
+    $items[$factura_por_email_page . '/confirmacion'] = array(
+        'menu_name' => "factura_por_email",
+        'description' => 'Permite subscribir a factura electrónica',
+        'page callback' => 'factura_por_email_confirm_page',
+        'access callback' => true,
+        'type' => MENU_VISIBLE_IN_BREADCRUMB,
+    );
+
+    $items['callback/factura-por-email/send-token'] = array(
+        'menu_name' => "factura_por_email",
+        'page callback' => 'factura_por_email_send_token_page',
+        'access callback' => true,
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
+}
+
+/*
+ * Hook Theme
+ */
+function factura_por_email_theme($existing, $type, $theme, $path){
+    return array(
+        'factura_por_email_terminos_condiciones' => array(
+            'variables' => array(
+                'title' => NULL,
+                'terms' => NULL,
+                'form'  => NULL,
+                'msg1'  => NULL,
+                'sid_class' => NULL,
+            ),
+            'template' => 'factura_por_email_terminos_condiciones',
+            'path' => $path . '/templates',
+        ),
+        'factura_por_email_error_page' => array(
+            'variables' => array(
+                'title' => NULL,
+                'msg1'  => NULL,
+            ),
+            'template' => 'factura_por_email_error_page',
+            'path' => $path . '/templates',
+        ),
+        'factura_por_email_respuesta' => array(
+            'variables' => array(
+                'title' => NULL,
+                'msg1'  => NULL,
+                'msg2'  => NULL,
+            ),
+            'template' => 'factura_por_email_respuesta',
+            'path' => $path . '/templates',
+        ),
+    );
+}
+
+/*
+ * Page factura_por_email
+ * Page to subscribe to electronic invoice
+ */
+function factura_por_email_page(){
+    // unset tid in order to config other account
+    unset($_SESSION['factura_por_email']['record']['tid']);
+     $_SESSION['factura_por_email']['update_email'] = false;
+    //$title = '<h1 class="factura-por-email-title">&nbsp;</h1>';
+    $title = '<h1 class="factura-por-email-title-text min">'.t('Facturaci&oacute;n electr&oacute;nica').'</h1>';
+    $page = '';
+    $form = drupal_get_form('factura_por_email_form');
+    $page.= drupal_render($form);
+
+    // Terminos y condiciones
+    $variables = array(
+        'title' => t('Terminos y condiciones'),
+        'terms' => factura_por_email_get_step1_terms(),
+        'form'  => drupal_get_form('factura_por_email_terms_form'),
+        'msg1'  => t('Debe aceptar los t&eacute;rminos para continuar.'),
+    );
+    $terminos = theme('factura_por_email_terminos_condiciones', $variables);
+
+    return '<div id="factura-por-email-wrapper"><div class="inner">'.$title.$page.$terminos.'</div></div>';
+}
+
+/*
+ * Token page
+ */
+function factura_por_email_token_page(){
+    $page = '';
+    $msisdn = isset($_SESSION['factura_por_email']['record']['tid']) ? $_SESSION['factura_por_email']['record']['msisdn'] : false;
+
+    if(factura_por_email_check_msisdn_ws((int)$msisdn)){
+        //$page.= '<h1 class="factura-por-email-title">&nbsp;</h1>';
+        $page.= '<h1 class="factura-por-email-title-text min">'.t('Facturaci&oacute;n electr&oacute;nica').'</h1>';
+        $form = drupal_get_form('factura_por_email_token_form');
+        $page.= drupal_render($form);
+        $result = factura_por_email_send_token_page(true);
+        $types = array('warning', 'status');
+        drupal_set_message($result['message'], $types[$result['type']]);
+    }else{
+        // error page - msisdn don't exist
+        $variables = array(
+            'title' => t('Facturaci&oacute;n electr&oacute;nica'),
+            'msg1'  => factura_por_email_get_msisdn_error(),
+        );
+        $page = theme('factura_por_email_error_page', $variables);
+    }
+
+    return '<div id="factura-por-email-wrapper"><div class="inner">'.$page.'</div></div>';
+}
+
+/*
+ * Token callback
+ */
+function factura_por_email_send_token_page($return_message = false){
+    $values = isset($_SESSION['factura_por_email']['record']['tid']) ? $_SESSION['factura_por_email']['record'] : false;
+    if($values == false){
+        drupal_set_message(t('Debe completar la solicitud de subscripci&oacute;n antes de ir al siguiente paso.'), 'warning');
+        drupal_goto(variable_get('factura_por_email_page', 'factura-por-email'));
+    }
+
+    $result = factura_por_email_send_token((int)$values['msisdn']);
+    $message = t('En unos instantes recibir&aacute; un mensaje de texto con el c&oacute;digo de seguridad.');
+    if($result == false){
+        $message = t('El servicio de env&iacute;o del c&oacute;digo de seguridad ha fallado.</br>'.
+                     'Por favor intentelo nuevamente en unos minutos.');
+    }
+    if($return_message){
+        return array(
+            'message' => $message,
+            'type'    => (int)$result,
+        );
+    }
+    echo $message;
+}
+
+/*
+ * Error page
+ */
+function factura_por_email_error_page(){
+
+    //$title = '<h1 class="factura-por-email-title">&nbsp;</h1>';
+    $msg = factura_por_email_get_error_msg();
+    $variables = array(
+        'title' => t('Facturaci&oacute;n electr&oacute;nica'),
+        'msg1'  => t($msg),
+    );
+    $page = theme('factura_por_email_error_page', $variables);
+
+    return $page;
+}
+
+/*
+ * factura por email response page
+ */
+function factura_por_email_confirm_page(){
+    //
+    $email_msg = '';
+    if(!$_SESSION['factura_por_email']['update_email']){
+        $email_msg = t(' <span style="color: red;">Ha ocurrido un error y la direccion de correo no se ha actualizado.</span>');
+    }
+    $data = isset($_SESSION['factura_por_email']['record']['tid']) ? $_SESSION['factura_por_email']['record'] : false;
+    $status = isset($_SESSION['factura_por_email']['record']['status']) ? (int)$_SESSION['factura_por_email']['record']['status'] : 0;
+    if($data == false || $status == 0){
+        drupal_goto(variable_get('factura_por_email_page', 'factura-por-email') . '/error');
+    }
+    $id = $data['tid'];
+    $text_id = '';
+    if($id != ''){
+        $text_id = '<span class="response-id">'.t('El ID de la transacci&oacute;n es: ').$id.'</span>';
+    }
+    $email  = $data['email'];
+    $msisdn = $data['msisdn'];
+    $title  = factura_por_email_get_respuesta_title();
+    $message = factura_por_email_get_respuesta_message();
+    $title = t($title);
+    $msg1  = t($message, array('@email' => $email, '@msisdn' => $msisdn));
+    $msg2  = $text_id;
+    $variables = array(
+        'title' => t($title),
+        'msg1'  => t($msg1) . $email_msg,
+        'msg2'  => t($msg2),
+    );
+    $page = theme('factura_por_email_respuesta', $variables);
+
+    return $page;
+}

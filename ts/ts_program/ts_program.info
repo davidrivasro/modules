@@ -1,0 +1,6 @@
+name = Tigo Star Program
+description = Program in Tigo Star.
+core = 7.x
+package = Tigo Star
+
+

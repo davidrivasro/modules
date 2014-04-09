@@ -1,0 +1,1277 @@
+<?php
+/*********** FORMULARIOS *********************/
+
+/** Mis Lineas **/
+function tol_mis_lineas_form($form, &$form_state, $linea){
+  
+	$linea_id= $linea['lineaId'];
+	$nombre_id= $linea['nombre'];
+  $linea_numero= $linea['numero'];
+  
+  $form = array();
+
+  $form['id'] = array(
+  	'#type' => 'hidden',
+  	'#value' => $linea_id,
+  );
+
+  $form['nombre_editar'] = array(
+  	'#type' => 'textfield',
+  	'#default_value' => $nombre_id,
+  );
+  
+  $form['numero_linea'] = array(
+  	'#type' => 'hidden',
+  	'#default_value' => $linea_numero,
+  );
+  
+  $form['linea'] = array(
+  	'#markup' => '<div class="linea_numero">'.$linea_numero.'</div>',
+  );
+
+  $form['guardar'] = array(
+    '#type' => 'submit',
+    '#value' => t('Guardar'),
+    //'#name' => 'continue',
+    '#name' => 'continue_'.$linea_id,
+    //'#attributes' => array('class' => array('form-send')),
+    '#attributes' => array('class' => array('form-send'), 'id' => 'tol_mis_lineas_form_'.$linea_id),
+    
+  );
+    
+  $form['cancelar'] = array(
+    '#type' => 'button',
+    '#value' => t('Cancelar'),
+    '#name' => 'cancelar',
+    '#submit' => array('tol_mis_lineas_cancel_button'),
+    '#attributes' => array('class' => array('form-cancel')),
+  );
+
+  return $form;
+}
+
+function tol_mis_lineas_cancel_button($form, &$form_state) {
+  $url = $_GET['destination'] ? $_GET['destination'] : '/online/mis-lineas';
+  drupal_goto($url);
+}
+
+
+function tol_mis_lineas_form_submit($form, &$form_state){
+
+ $today = date("Y-m-d, g:i:s a");
+ error_log("tol_mis_lineas_form_submit $today - form_state['values']['id']: ".$form_state['values']['id']." \n",3,'/mnt/logs/drupal/zz.log');
+ 
+error_log("tol_mis_lineas_form_submit $today - form_state['values']['nombre_editar']: ".$form_state['values']['nombre_editar']." \n",3,'/mnt/logs/drupal/zz.log');
+
+error_log("tol_mis_lineas_form_submit $today - form_state['values']['numero_linea']: ".$form_state['values']['numero_linea']." \n",3,'/mnt/logs/drupal/zz.log');
+
+
+		module_load_include('inc','tol','lib/lines');
+		$lineDB = new TOL_lines();
+		
+		global $user;
+  	
+  	if (empty($user->uid)){
+	  	drupal_goto('online');
+	  } 
+  	
+  	$obj_lineas = $lineDB->get($user->uid);
+  	
+  	if (empty($obj_lineas)){ //si no hay lineas activas voy a online?
+	  	drupal_goto('online');
+	  }
+  	
+  	$linea_mod = $lineDB->getByMSISDN($obj_lineas,$form_state['values']['numero_linea']);
+    
+    if ($linea_mod != NULL) {
+        $linea_mod->name = $form_state['values']['nombre_editar'];
+        
+        $lineDB->modifyName($linea_mod, $form_state['values']['numero_linea']);
+        
+        drupal_set_message(t('El nombre de la linea ha sido actualizado.'), 'status');
+    } else {
+ 			drupal_set_message(t('No se puedo actualizar el nombre de la linea. Intentalo mas tarde.'), 'error');
+ 		
+ 		}
+ 
+}
+
+/** Form Editar facturacion **/
+function tol_facturacion_form($form, &$form_state){
+
+  $recibir_factura_electronica = array(0 => t('Si'), 1 => t('No'));
+  $detalle_factura_electronica = array(0 => t('Si'), 1 => t('No'));
+
+  $recibir_factura_fisica = array(0 => t('Si'), 1 => t('No'));
+  $detalle_factura_fisica = array(0 => t('Si'), 1 => t('No'));
+
+  $form=array();
+  // Fieldset factura electronica
+  $form['factura_electronica'] = array(
+  '#type' => 'fieldset',
+  '#title' => t('Factura Electronica'),
+  '#weight' => 0,
+  '#collapsible' => FALSE,
+  );
+
+  $form['factura_electronica']['recibir_factura'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Recibir factura'),
+    '#options' => $recibir_factura_electronica,
+  );
+
+  $form['factura_electronica']['correo'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Email'),
+  ); 
+
+  $form['factura_electronica']['detalle_factura'] = array(
+    '#type' => 'radios',
+    '#title' => t('Detalle de factura'),
+    '#options' => $detalle_factura_electronica,
+  );
+
+  // Fieldset factura fisica
+  $form['factura_fisica'] = array(
+  '#type' => 'fieldset',
+  '#title' => t('Factura fisica'),
+  '#weight' => 0,
+  '#collapsible' => FALSE,
+  );
+
+  $form['factura_fisica']['recibir_factura'] = array(
+    '#type' => 'radios',
+    '#title' => t('Recibir factura'),
+    '#options' => $recibir_factura_fisica,
+  );
+
+  $form['factura_fisica']['direccion'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Direcci&oacute;n'),
+  );
+
+  $form['factura_fisica']['departamento'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Departamento'),
+  ); 
+
+  $form['factura_fisica']['ciudad'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Ciudad'),
+  ); 
+
+  $form['factura_fisica']['telefono'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Tel&eacute;fono'),
+  ); 
+
+  $form['factura_fisica']['detalle_factura'] = array(
+    '#type' => 'radios',
+    '#title' => t('Detalle de factura'),
+    '#options' => $detalle_factura_fisica,
+  );
+
+
+  $form['guardar'] = array(
+      '#type' => 'submit',
+      '#value' => t('Guardar'),
+      '#name' => 'continue',
+      '#attributes' => array('class' => array('form-send')),
+    );
+    
+  $form['cancelar'] = array(
+      '#type' => 'submit',
+      '#value' => t('Cancelar'),
+      '#name' => 'cancelar',
+      '#submit' => array('tol_facturacion_cancel_button'),
+      '#attributes' => array('class' => array('form-cancel')),
+    );
+
+  return $form;
+}
+
+function tol_facturacion_cancel_button($form, &$form_state) {
+  $url = $_GET['destination'] ? $_GET['destination'] : '/online/facturacion';
+  drupal_goto($url);
+}
+
+
+function tol_facturacion_submit($form, &$form_state){
+ //AQUI VA LA LÓGICA DE NEGOCIO
+}
+
+/* form Factura historial */
+function tol_facturacion_historial_form($form, &$form_state){
+  $form=array();
+
+  $form['date_desde'] = array(
+    '#type' => 'date_popup',
+    '#title' => t('Desde:'),
+    '#date_format' => 'd-m-Y',
+    '#date_year_range' => '-100:+0',
+    '#default_value' => empty($date)? '' : date('Y-m-d H:i:s', $date),
+  );
+
+  $form['date_hasta'] = array(
+    '#type' => 'date_popup',
+    '#title' => t('Hasta:'),
+    '#date_format' => 'd-m-Y',
+    '#date_year_range' => '-100:+0',
+    '#default_value' => empty($date)? '' : date('Y-m-d H:i:s', $date),
+  );
+    
+  $form['lista'] = array(
+      '#type' => 'submit',
+      '#value' => t('Lista'),
+      '#name' => 'lista',
+    );
+  $form['cuadricula'] = array(
+      '#type' => 'submit',
+      '#value' => t('Cuadricula'),
+      '#name' => 'cuadricula',
+    );
+  return $form;
+}
+
+function tol_facturacion_historial_submit($form, &$form_state){
+ //AQUI VA LA LÓGICA DE NEGOCIO
+}
+
+
+
+
+
+/* form Factura detalle */
+function tol_factura_detalle_form($form, &$form_state){
+  $form=array();
+  $form['nombre'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Nombre'),
+  );
+  $form['apellido'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Apellido'),
+  );
+  $form['targeta'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Targeta'),
+  );
+  $form['nro_targeta'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Nro de targeta'),
+  );
+  $form['fecha_vencimiento'] = array(
+    '#title' => t('Fecha de venc.'),
+    '#type' => 'date',
+    '#default_value' => array(
+    'month' => format_date(time(), 'custom', 'n'), 
+    'year' => format_date(time(), 'custom', 'Y'),
+  ),
+  );
+  $form['codigo_seguridad'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Cod. de Seguridad'),
+  );
+    
+  $form['continue'] = array(
+      '#type' => 'submit',
+      '#value' => t('Pagar'),
+      '#name' => 'continue',
+    );
+    
+  return $form;
+}
+
+function tol_factura_detalle_submit($form, &$form_state){
+ //AQUI VA LA LÓGICA DE NEGOCIO
+}
+
+/* form Editar mis datos */
+function tol_mis_datos_form($form, &$form_state, $variables){
+  
+   $today = date("Y-m-d, g:i:s a");
+error_log("tol_mis_datos_form $today \n",3,'/mnt/logs/drupal/zz.log');
+  
+  $form = array();
+
+  $form['nombre'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Nombre'),
+    '#required' => TRUE,
+    '#default_value' => $variables['nombre'],
+  );
+  
+  $form['apellido'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Apellido'),
+    '#required' => TRUE,
+    '#default_value' => $variables['apellido'],
+  );
+
+  // Tipo Documento 
+  $v = taxonomy_vocabulary_machine_name_load('type_document');
+  $terms = taxonomy_get_tree($v->vid);
+  $type_document_options = array();
+  $city_child = array();
+  foreach ($terms as $key => $value) {
+  	$type_document_options[$value->tid] = $value->name;  	
+  }
+  
+  $form['tipo_documento'] = array(
+    '#type' => 'select',
+    '#title' => t('Tipo de documento'),
+    '#options' => $type_document_options,
+	  '#required' => variable_get('tol_flag_required_field_tipo_documento', 0),
+    //'#default_value' => $category['selected'],
+    //'#default_value' => $type_document_options,
+    //'#disabled' => TRUE,
+  );
+  
+  $form['numero_documento'] = array(
+    '#type' => 'textfield',
+    '#title' => t('N&uacute;mero de documento'),
+    '#required' => TRUE,
+    '#disabled' => TRUE,
+    '#default_value' => $variables['nro_dni'],
+  );
+  
+  $form['direccion'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Direcci&oacute;n'),
+    '#default_value' => $variables['direccion'],
+  );
+  
+  $form['ciudad'] = array(
+    '#type' => 'textfield',
+    '#title' => t('C&iacute;udad'),
+    '#default_value' => $variables['ciudad'],
+  );
+  
+  $form['departamento'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Departamento'),
+    '#default_value' => $variables['departamento'],
+  );
+  
+  $form['telefono'] = array(
+    '#type' => 'textfield',
+    '#title' => t('T&eacute;lefono de contacto'),
+    '#required' => TRUE,
+    '#default_value' => $variables['telefono'],
+  );
+  
+  $form['correo'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Correo'),
+    '#required' => TRUE,
+    '#disabled' => TRUE,
+    '#default_value' => $variables['correo'],
+  );
+    
+  $form['aceptar'] = array(
+      '#type' => 'submit',
+      '#value' => t('Aceptar'),
+      '#name' => 'continue',
+      '#attributes' => array('class' => array('form-send')),
+    );
+  
+  $form['cancelar'] = array(
+    '#type' => 'submit',
+    '#value' => t('Cancelar'),
+    '#name' => 'cancelar',
+    '#submit' => array('tol_mis_datos_cancel_button'),
+    '#attributes' => array('class' => array('form-cancel')),
+  );
+    
+  return $form;
+}
+
+function tol_mis_datos_cancel_button($form, &$form_state) {
+  $url = $_GET['destination'] ? $_GET['destination'] : '/online/mis-datos';
+  drupal_goto($url);
+}
+
+
+function tol_mis_datos_form_validate($form, &$form_state){
+
+$today = date("Y-m-d, g:i:s a");
+error_log("tol_mis_datos_form_validate $today - form_state['values']: ".print_r($form_state['values'], TRUE)." \n",3,'/mnt/logs/drupal/zz.log');
+
+
+	if (form_get_errors()) return false;
+		
+	if (!is_numeric($form_state['values']['telefono'])){
+    form_set_error('telefono',t('El número de teléfono debe ser numérico'));
+	}
+	
+	
+	if ( (variable_get('tol_flag_required_service_validation', 0) == 1) ){
+		//Validacion con servicios de tigo
+		
+		$documentType = $form_state['values']['tipo_documento'];
+    		
+		error_log("tol_mis_datos_form_validate $today - documentType: ".$documentType." \n",3,'/mnt/logs/drupal/zz.log');
+	
+		$term = taxonomy_term_load($documentType);
+
+    if ($term) {
+    	$documentType = $term->name;
+    }
+
+		
+		$documentNumber = $form_state['values']['numero_documento'];
+		$account = $form_state['values']['telefono'];
+		    
+		    
+$today = date("Y-m-d, g:i:s a");
+error_log("tol_mis_datos_form_validate $today - documentType: ".$documentType." \n",3,'/mnt/logs/drupal/zz.log');
+error_log("tol_mis_datos_form_validate $today - documentNumber: ".$documentNumber." \n",3,'/mnt/logs/drupal/zz.log');
+error_log("tol_mis_datos_form_validate $today - account: ".$account." \n",3,'/mnt/logs/drupal/zz.log');
+		
+		$today = date("Y-m-d, g:i:s a");
+error_log("tol_mis_datos_form_validate $today Validacion con servicios de tigo \n",3,'/mnt/logs/drupal/zz.log');
+		
+		
+		
+  		module_load_include('inc', 'tigo_api_services', 'tigo_api_services_api');
+
+      $tigo = new TigoAPIService();
+      $result = $tigo->ValidateClientAccount($documentType, $documentNumber, $account); //ESTE METODO NO ESTA EN TIGOAPPS
+      if (!empty($result->ValidateClientAccountResponse->ResponseHeader->Message->state)) {
+        $is_ok = $result->ValidateClientAccountResponse->ResponseHeader->Message->state == 'OK';
+        $is_success = $is_ok && $result->ValidateClientAccountResponse->responseBody->success;
+        if (!$is_success) {
+	 				form_set_error('field_msisdn', t('La información ingresada no es valida'));
+          
+          watchdog('tigo_online_lineas.module',"tigo->ValidateClientAccount($documentType, $documentNumber, $account) success=".var_export($result->ValidateClientAccountResponse->responseBody->success,true));
+        }
+        
+      }else {
+        form_set_error('mail', t('En estos momentos no podemos validar la información, intente mas tarde'));
+      }
+      
+  } 
+  
+}
+
+
+function tol_mis_datos_form_submit($form, &$form_state){
+ 
+ $today = date("Y-m-d, g:i:s a");
+error_log("tol_mis_datos_form_submit $today \n",3,'/mnt/logs/drupal/zz.log');
+
+	// Guardo los datos
+	global $user;
+	$userinfo = user_load($user->uid, true);
+	
+	
+//error_log("tol_mis_datos_form_validate $today - userinfo: ".print_r($userinfo, TRUE)." \n",3,'/mnt/logs/drupal/zz.log');
+	
+	
+	$new_user_info = array(
+    'field_ciudad' => array( //DEBEN SER TID (taxonomia) Justo ahora esta como value
+	    'und' => array(
+	      0 => array(
+	        'value' => $form_state['values']['ciudad'],
+	      ),
+	    ),
+	  ),
+
+    'field_direccion_user' => array(
+	    'und' => array(
+	      0 => array(
+	        'value' => $form_state['values']['direccion'],
+	      ),
+	    ),
+	  ),
+	  
+	  'field_user_fullname' => array(
+	    'und' => array(
+	      0 => array(
+	        'value' => $form_state['values']['nombre'].' '.$form_state['values']['apellido'],
+	      ),
+	    ),
+	  ),
+
+    'field_departamento' => array( //DEBEN SER TID (taxonomia) Justo ahora esta como value
+	    'und' => array(
+	      0 => array(
+	        'value' => $form_state['values']['departamento'],
+	      ),
+	    ),
+	  ),
+   
+	  /*
+	  'field_tipo_documento' => array(
+	    'und' => array(
+	      0 => array(
+	        'tid' => $form_state['values']['field_tipo_documento'],
+	      ),
+	    ),
+	  ),
+
+    'field_nro_documento' => array(
+	    'und' => array(
+	      0 => array(
+	        'value' => $form_state['values']['field_nro_documento'],
+	      ),
+	    ),
+	  ),
+    */
+  );
+  
+	//Guardo la informacion del usuario
+	$account = user_save($userinfo, $new_user_info);
+	
+	drupal_set_message(t('Los datos de tu cuenta han sido modificados exitosamente.'), 'status');
+	
+	drupal_goto('online');
+
+
+}
+
+
+// Form Asociar Linea
+function tol_asociar_linea_form($form, &$form_state){
+	
+	$today = date("Y-m-d, g:i:s a");
+error_log("tol_asociar_linea_form $today \n",3,'/mnt/logs/drupal/zz.log');
+	
+	
+  $form = array();
+  $form['name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Nombre'),
+    '#required' => true,
+  );
+  
+  $form['line'] = array(
+    '#type' => 'textfield',
+    '#title' => t('N&uacute;mero de l&iacute;nea'),
+    '#required' => true,
+  ); 
+
+  $form['terms'] = array(
+	  '#type' => 'checkbox',
+	  '#title' => t('Acepto los t&eacute;rminos y condiciones.'),
+	  '#required' => true,
+  );
+    
+  $form['continue'] = array(
+      '#type' => 'submit',
+      '#value' => t('Continuar'),
+      '#name' => 'continue',
+      
+      /*
+      '#attributes' => array(
+        'class' => array('close-colorbox'),
+      ),
+      
+      
+      '#ajax' => array(
+        'callback' => 'tol_asociar_linea_form_callback',
+        'wrapper'=>'cboxLoadedContent'
+      )
+      //Agregar colorbox/nojs
+      */
+      
+      '#ajax'  => array(
+			  'callback' => 'tol_asociar_linea_form_callback',
+	    	//el wrapper siempre tiene que ser el id del form
+	      //a menos que se especifique lo contrario siempre
+	      //será igual a strtr(__FUNCTION__,'_','-')
+			  'wrapper' => 'tol-asociar-linea-form',
+	    ),
+    );
+    
+  return $form;
+}
+
+
+function tol_asociar_linea_form_validate($form, &$form_state){
+
+	 $today = date("Y-m-d, g:i:s a");
+error_log("tol_asociar_linea_form_validate $today \n",3,'/mnt/logs/drupal/zz.log');
+
+	if (form_get_errors()) return false;
+		
+	if (!is_numeric($form_state['values']['line'])){
+		
+    form_set_error('line',t('El número de teléfono debe ser numérico'));
+	
+	} else {
+		$_SESSION['asociar-name'] = $form_state['values']['name'];
+		$_SESSION['asociar-line'] = $form_state['values']['line'];
+	}
+	
+  
+}
+
+
+function tol_asociar_linea_form_submit($form, &$form_state){
+
+ $today = date("Y-m-d, g:i:s a");
+error_log("tol_asociar_linea_form_submit $today SUBMIT \n",3,'/mnt/logs/drupal/zz.log');
+
+}
+
+
+//function tol_asociar_linea_form_submit($form, &$form_state){
+function tol_asociar_linea_form_callback($form, &$form_state){
+ 
+ $today = date("Y-m-d, g:i:s a");
+error_log("tol_asociar_linea_form_callback ------- $today \n",3,'/mnt/logs/drupal/zz.log');
+ 
+ 
+   $commands = array();
+   
+   if (variable_get('tol_flag_required_step_security_code') == '1') {
+	 
+	 		$msisdn = $form_state['values']['line'];
+	 		
+	 		$_SESSION['confirmation-code-msisdn'] = $msisdn; //se guarda en sesion el msisdn
+	 
+	 		_tol_sms_msisdn_confirmation($msisdn); //servicio que manda el sms
+	 
+	 	
+	 		error_log("tol_asociar_linea_form_callback $today tigo_region_flag_required_step_security_code \n",3,'/mnt/logs/drupal/zz.log');
+	 		
+	 		//$commands[] = ajax_command_replace('#cboxLoadedContent', tol_editar_codigo_seguridad_page());
+	 		
+	 		drupal_goto('online/editar/codigo-seguridad'); //sin ajax
+	 		
+	 		
+	 		
+	 		
+	 		
+	 	
+	 } else if (variable_get('tol_flag_required_step_enter_document_info') == '1') {
+	 		
+	 		error_log("tol_asociar_linea_form_callback $today tigo_region_flag_required_step_enter_document_info \n",3,'/mnt/logs/drupal/zz.log');
+	 		
+	 		// $commands[] = ajax_command_replace('#cboxLoadedContent', tol_editar_documento_page());
+	 		
+	 		drupal_goto('online/editar/documento'); //sin ajax
+	 
+	 } else if (variable_get('tol_flag_required_step_security_questions') == '1') {
+	 		
+	 		error_log("tol_asociar_linea_form_callback $today tigo_region_flag_required_step_security_questions \n",3,'/mnt/logs/drupal/zz.log');
+	 		
+	 		//$commands[] = ajax_command_replace('#cboxLoadedContent', tol_editar_preguntas_page());
+	 		
+	 		drupal_goto('online/editar/preguntas'); //sin ajax
+	 	
+	 } else {
+	 		_tol_addNewLine();
+		 
+		 	drupal_goto('online/mis-lineas'); //sin ajax
+	 }
+
+  //return  array('#type' => 'ajax', '#commands' => $commands);
+}
+
+
+
+
+/** Form Preguntas **/
+function tol_preguntas_form($form, &$form_state){
+	
+	$today = date("Y-m-d, g:i:s a");
+error_log("tol_preguntas_form $today \n",3,'/mnt/logs/drupal/zz.log');
+	
+  $preguntas1 = array(0 => t('Primera Respuesta'), 1 => t('Segunda Respuesta'), 2 => t('Tercera Respuesta'));
+  $preguntas2 = array(0 => t('Primera Respuesta'), 1 => t('Segunda Respuesta'), 2 => t('Tercera Respuesta'));
+  $preguntas3 = array(0 => t('Primera Respuesta'), 1 => t('Segunda Respuesta'), 2 => t('Tercera Respuesta'));
+  $preguntas4 = array(0 => t('Primera Respuesta'), 1 => t('Segunda Respuesta'), 2 => t('Tercera Respuesta'));
+
+
+  $form = array();
+	$form['pregunta1'] = array(
+    '#type' => 'radios',
+    '#title' => t('Pregunta numero 1'),
+    '#options' => $preguntas1,
+  );
+
+  $form['pregunta2'] = array(
+    '#type' => 'radios',
+    '#title' => t('Pregunta numero 2'),
+    '#options' => $preguntas2,
+  );
+
+  $form['pregunta3'] = array(
+    '#type' => 'radios',
+    '#title' => t('Pregunta numero 3'),
+    '#options' => $preguntas3,
+  );
+
+  $form['pregunta4'] = array(
+    '#type' => 'radios',
+    '#title' => t('Pregunta numero 4'),
+    '#options' => $preguntas4,
+  );
+   
+  $form['continue'] = array(
+    '#type' => 'submit',
+    '#value' => t('Continuar'),
+    '#name' => 'continue',
+    
+    /*
+    '#attributes' => array(
+      'class' => array('close-colorbox'),
+    ),
+    '#ajax' => array(
+      'callback' => 'tol_preguntas_form_callback',
+      'wrapper'=>'cboxLoadedContent'
+    )
+    //Agregar colorbox/nojs
+    */
+  );
+    
+  return $form;
+}
+
+function tol_preguntas_form_validate($form, &$form_state){
+ 
+ $today = date("Y-m-d, g:i:s a");
+error_log("tol_preguntas_form_validate $today \n",3,'/mnt/logs/drupal/zz.log');
+
+}
+
+/*
+function tol_preguntas_form_submit($form, &$form_state){
+  
+  $today = date("Y-m-d, g:i:s a");
+error_log("tol_preguntas_form_submit $today \n",3,'/mnt/logs/drupal/zz.log');
+
+}
+*/
+
+function tol_preguntas_form_submit($form, &$form_state){
+//function tol_preguntas_form_callback($form, &$form_state){
+ 
+$today = date("Y-m-d, g:i:s a");
+error_log("tol_preguntas_form_callback $today \n",3,'/mnt/logs/drupal/zz.log');
+
+//Aqui llamo al servicio de Evidente
+
+
+//Si las respuestas son correctas entonces salvo
+	if (true) { //ARREGLAR
+		 _tol_addNewLine();
+		 drupal_goto('online/mis-lineas'); //sin ajax
+	}
+
+/*
+	$commands=array();
+  $commands[] = ajax_command_replace('#cboxLoadedContent', tol_editar_documento_page());
+
+  return  array('#type' => 'ajax', '#commands' => $commands);
+*/
+
+}
+
+
+/* form codigo de seguridad */
+function tol_codigo_seguridad_form($form, &$form_state, $destination="linea"){
+  
+$today = date("Y-m-d, g:i:s a");
+error_log("tol_codigo_seguridad_form $today destination: ".$destination." \n",3,'/mnt/logs/drupal/zz.log');
+
+  
+  $form = array();
+  $form['codigo_seguridad'] = array(
+    '#type' => 'textfield',
+    '#title' => t('C&oacute;digo de seguridad'),
+    '#required' => true,
+  );
+  
+  $form['destination'] = array(
+  	'#type' => 'hidden',
+  	'#value' => $destination,
+  );
+  
+  $form['continue'] = array(
+      '#type' => 'submit',
+      '#value' => t('Continuar'),
+      '#name' => 'continue',
+  /*
+      '#attributes' => array(
+        'class' => array('close-colorbox'),
+      ),
+      '#ajax' => array(
+        'callback' => 'tol_codigo_seguridad_form_callback',
+        'wrapper'=>'cboxLoadedContent'
+      )
+      //Agregar colorbox/nojs
+      */
+  		'#ajax'  => array(
+			  'callback' => 'tol_codigo_seguridad_form_callback',
+	    	//el wrapper siempre tiene que ser el id del form
+	      //a menos que se especifique lo contrario siempre
+	      //será igual a strtr(__FUNCTION__,'_','-')
+			  'wrapper' => 'tol-codigo-seguridad-form',
+	    ),
+  );
+    
+  return $form;
+}
+
+
+
+function tol_codigo_seguridad_form_validate($form, &$form_state){
+	
+	$today = date("Y-m-d, g:i:s a");
+error_log("tol_codigo_seguridad_form_validate $today \n",3,'/mnt/logs/drupal/zz.log');
+
+	if (form_get_errors()) return false;
+	
+	if ($_SESSION['confirmation-code'] != $form_state['values']['codigo_seguridad']) {
+		form_set_error('codigo_seguridad',t('El codigo ingresado no coincide. Por favor intentalo de nuevo.'));
+	}
+}
+
+
+function tol_codigo_seguridad_form_submit($form, &$form_state){
+  
+  $today = date("Y-m-d, g:i:s a");
+error_log("tol_codigo_seguridad_form_submit $today \n",3,'/mnt/logs/drupal/zz.log');
+
+}
+
+
+//function tol_codigo_seguridad_form_submit($form, &$form_state){
+function tol_codigo_seguridad_form_callback($form, &$form_state){
+
+	
+	//AQUI SE MODIFICA COMO SE LLAMAN A LOS SIGUIENTES PASOS
+	
+//	$errors= drupal_get_messages(null,false);
+//	if (!empty($errors)) return $form;
+//
+//	return drupal_get_form('fw_form2_form');
+	
+	
+	
+	if ($form_state['values']['destination'] == "clave") { //Si es clave voy al proceso de la segunda clave
+		
+		drupal_goto('online/editar/segunda-contrasena'); //sin ajax
+		
+	} else { // Voy al proceso de agregar una linea
+
+		if (variable_get('tol_flag_required_step_enter_document_info') == '1') {
+		 		// $commands[] = ajax_command_replace('#cboxLoadedContent', tol_editar_documento_page());
+		 		drupal_goto('online/editar/documento'); //sin ajax
+		 
+		 } else if (variable_get('tol_flag_required_step_security_questions') == '1') {
+		 		
+		 		//$commands[] = ajax_command_replace('#cboxLoadedContent', tol_editar_preguntas_page());
+		 		
+		 		drupal_goto('online/editar/preguntas'); //sin ajax
+		 	
+		 } else {
+	 			_tol_addNewLine();
+			 	drupal_goto('online/mis-lineas'); //sin ajax
+		 }
+			 
+		 /*
+		$commands=array();
+	  $commands[] = ajax_command_replace('#cboxLoadedContent', tol_editar_documento_page());
+	
+	  return  array('#type' => 'ajax', '#commands' => $commands);
+		*/
+	}
+
+}
+
+
+// Form Segunda contrasena
+function tol_segunda_contrasena_form($form, &$form_state){
+	
+	$today = date("Y-m-d, g:i:s a");
+error_log("tol_segunda_contrasena_form $today \n",3,'/mnt/logs/drupal/zz.log');
+	
+  $form = array();
+  
+  $form['segunda_contrasena'] = array(
+    '#type' => 'password',
+    '#title' => t('Contrase&ntilde;a'),
+    '#required' => TRUE,
+  );
+
+  $form['repetir_contrasena'] = array(
+    '#type' => 'password',
+    '#title' => t('Repetir contrase&ntilde;a'),
+    '#required' => TRUE,
+  );
+    
+  $form['continue'] = array(
+      '#type' => 'submit',
+      '#value' => t('Continuar'),
+      '#name' => 'continue',
+    );
+    
+  return $form;
+}
+
+function tol_segunda_contrasena_form_validate($form, &$form_state){
+
+	 $today = date("Y-m-d, g:i:s a");
+error_log("tol_segunda_contrasena_form_validate $today \n",3,'/mnt/logs/drupal/zz.log');
+	
+	if (form_get_errors()) return false;
+	
+	if (!is_numeric($form_state['values']['segunda_contrasena'])){
+    form_set_error('segunda_contrasena',t('La contraseña debe contener solo caracteres numéricos'));
+	}
+	
+	if (!is_numeric($form_state['values']['repetir_contrasena'])){
+    form_set_error('repetir_contrasena',t('La contraseña debe contener solo caracteres numéricos'));
+	}
+	
+	if ($form_state['values']['segunda_contrasena'] != $form_state['values']['repetir_contrasena']){
+    form_set_error('segunda_contrasena',t('Los campos no coindicen. Por favor intente de nuevo '));
+	} else if (strlen($form_state['values']['segunda_contrasena']) < 6){
+    form_set_error('segunda_contrasena',t('La contraseña debe tener al menos 6 caracteres numéricos'));
+	}
+	
+ 
+}
+
+
+function tol_segunda_contrasena_form_submit($form, &$form_state){
+ //AQUI VA LA LÓGICA DE NEGOCIO
+ 
+ $today = date("Y-m-d, g:i:s a");
+error_log("tol_segunda_contrasena_form_submit $today \n",3,'/mnt/logs/drupal/zz.log');
+
+	
+	global $user;
+
+	$account = user_load($user->uid,true);
+  $account->field_segunda_clave['und'][0]['value'] = $form_state['values']['segunda_contrasena'];
+  user_save($account);
+
+
+	$_SESSION['confirmation-code-msisdn']='';
+
+	drupal_set_message(t('Su segunda contraseña ha sido creada con exito.'), 'status');
+	drupal_goto('/online/mis-lineas/mis-datos'); //sin ajax
+ 
+}
+
+
+/* form documento */
+function tol_documento_form($form, &$form_state){
+	
+		 $today = date("Y-m-d, g:i:s a");
+error_log("tol_documento_form $today \n",3,'/mnt/logs/drupal/zz.log');
+	
+  $form = array();
+
+  // Tipo Documento 
+  $v = taxonomy_vocabulary_machine_name_load('type_document');
+  $terms = taxonomy_get_tree($v->vid);
+  $type_document_options = array();
+  $city_child = array();
+  foreach ($terms as $key => $value) {
+  	$type_document_options[$value->tid] = $value->name;  	
+  }
+  
+  $form['tipo_documento'] = array(
+    '#type' => 'select',
+    '#title' => t('Tipo de documento'),
+    '#options' => $type_document_options,
+	  '#required' => variable_get('tol_flag_required_field_tipo_documento', 0),
+    //'#default_value' => $category['selected'],
+    //'#default_value' => $type_document_options,
+    //'#disabled' => TRUE,
+  );
+  
+  $form['numero_documento'] = array(
+    '#type' => 'textfield',
+    '#title' => t('N&uacute;mero de documento'),
+    '#required' => TRUE,
+  );
+  
+  $form['fecha_expedicion'] = array(
+	  '#title' => t('Fecha de expedici&oacute;n'),
+	  '#type' => 'date',
+	  '#default_value' => array(
+	    'month' => format_date(time(), 'custom', 'n'), 
+	    'day' => format_date(time(), 'custom', 'j'), 
+	    'year' => format_date(time(), 'custom', 'Y'),
+	  ),
+  );
+
+  $form['continue'] = array(
+    '#type' => 'submit',
+    '#value' => t('Continuar'),
+    '#name' => 'continue',
+    /*
+    '#attributes' => array(
+      'class' => array('close-colorbox'),
+    ),
+    '#ajax' => array(
+      'callback' => 'tol_documento_form_callback',
+      'wrapper'=>'cboxLoadedContent'
+    )
+    */
+    //Agregar colorbox/nojs
+  );
+    
+  return $form;
+}
+
+function tol_documento_form_validate($form, &$form_state){
+
+	 $today = date("Y-m-d, g:i:s a");
+error_log("tol_documento_form_validate $today \n",3,'/mnt/logs/drupal/zz.log');
+	
+	if (form_get_errors()) return false;
+	
+	global $user;
+	$account = user_load($user->uid, true);
+
+	$day = $form_state['values']['fecha_expedicion']['day'];
+	$month = $form_state['values']['fecha_expedicion']['month'];
+	$year = $form_state['values']['fecha_expedicion']['year'];
+	
+	if (!empty($account->field_nro_documento[LANGUAGE_NONE][0]['value'])){
+		if ($account->field_nro_documento[LANGUAGE_NONE][0]['value'] != $form_state['values']['numero_documento']) { //el codigo coindice
+			form_set_error('numero_documento',t('El numero de documento ingresado no coincide.'));
+		}
+	}
+ 
+}
+
+/*
+function tol_documento_form_submit($form, &$form_state){
+ 
+ 
+ $today = date("Y-m-d, g:i:s a");
+error_log("tol_documento_form_submit $today \n",3,'/mnt/logs/drupal/zz.log');
+ 
+}
+*/
+
+function tol_documento_form_submit($form, &$form_state){
+//function tol_documento_form_callback($form, &$form_state){
+ 
+ $today = date("Y-m-d, g:i:s a");
+error_log("tol_documento_form_callback $today \n",3,'/mnt/logs/drupal/zz.log');
+		
+		if (variable_get('tol_flag_required_step_security_questions') == '1') {
+		 		
+		 		//$commands[] = ajax_command_replace('#cboxLoadedContent', tol_editar_preguntas_page());
+		 		
+		 		drupal_goto('online/editar/preguntas'); //sin ajax
+		 	
+		} else {
+	 			_tol_addNewLine();
+			 	drupal_goto('online/mis-lineas'); //sin ajax
+		 }
+ 
+}
+
+
+
+/** Eliminar linea **/
+function tol_eliminar_linea_form($form, &$form_state, $lineaInfo){
+	
+	$today = date("Y-m-d, g:i:s a");
+error_log("tol_eliminar_linea_form $today - lineaID: ".$lineaInfo['lineaID']." \n",3,'/mnt/logs/drupal/zz.log');
+error_log("tol_eliminar_linea_form $today - lineaName: ".$lineaInfo['lineaName']." \n",3,'/mnt/logs/drupal/zz.log');
+error_log("tol_eliminar_linea_form $today - lineaNum: ".$lineaInfo['lineaNum']." \n",3,'/mnt/logs/drupal/zz.log');
+
+  $form = array();
+
+  $form['id'] = array(
+	'#type' => 'hidden',
+  '#value' => $lineaInfo['lineaID'],
+  );
+  
+  $form['name'] = array(
+	'#type' => 'hidden',
+  '#value' => $lineaInfo['lineaName'],
+  );
+  
+  $form['num'] = array(
+	'#type' => 'hidden',
+  '#value' => $lineaInfo['lineaNum'],
+  );
+
+  $form['cancelar'] = array(
+      '#type' => 'submit',
+      '#value' => t('Cancelar'),
+      '#name' => 'cancelar',
+      '#submit' => array('tol_eliminar_cancel_button'),
+      '#attributes' => array('class' => array('form-cancel')),
+    );
+    
+  $form['guardar'] = array(
+      '#type' => 'submit',
+      '#value' => t('Aceptar'),
+      '#name' => 'continue',
+      '#attributes' => array('class' => array('form-send')),
+    );
+
+  return $form;
+}
+
+function tol_eliminar_cancel_button($form, &$form_state) {
+
+$today = date("Y-m-d, g:i:s a");
+error_log("tol_eliminar_cancel_button $today -  \n",3,'/mnt/logs/drupal/zz.log');
+
+  $url = $_GET['destination'] ? $_GET['destination'] : '/online/mis-lineas';
+  drupal_goto($url);
+}
+
+function tol_eliminar_linea_form_submit($form, &$form_state){
+
+ $today = date("Y-m-d, g:i:s a");
+error_log("tol_eliminar_linea_form_submit $today - form_state['values']['id']: ".$form_state['values']['id']." \n",3,'/mnt/logs/drupal/zz.log');
+error_log("tol_eliminar_linea_form_submit $today - form_state['values']['name']: ".$form_state['values']['name']." \n",3,'/mnt/logs/drupal/zz.log');
+error_log("tol_eliminar_linea_form_submit $today - form_state['values']['num']: ".$form_state['values']['num']." \n",3,'/mnt/logs/drupal/zz.log');
+ 
+ 
+ 		entity_delete('lineas_celulares_usuario', $form_state['values']['id']); //se borra la linea
+ 		
+ 		if ($_SESSION['my_predetermi_line'] == $form_state['values']['num']){
+ 			$_SESSION['my_predetermi_line'] = null;
+ 		}
+ 		
+ 		if ($_SESSION['my_line'] == $form_state['values']['num']){
+ 			$_SESSION['my_line'] = null;
+ 		}
+ 		
+    drupal_set_message(t('Se ha borrado la línea @name', array('@name' => $form_state['values']['name'])));
+    
+    drupal_goto('/online/mis-lineas');
+}
+
+
+function tol_linea_detalle_validacion_form($form, &$form_state){
+
+  $form = array();
+
+  $form['nombre'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Nombre'),
+  );
+
+  $form['apellido'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Apellido'),
+  );
+
+  $form['tipo_dni'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Tipo de documento'),
+  );
+
+  $form['nro_dni'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Numero de documento'),
+  );
+
+  $form['direccion'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Direccion'),
+  );
+
+  $form['departamento'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Departamento'),
+  );
+
+  $form['ciudad'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Ciudad'),
+  );
+
+  $form['atras'] = array(
+      '#type' => 'submit',
+      '#value' => t('Atras'),
+      '#name' => 'cancelar',
+      '#attributes' => array('class' => array('form-cancel')),
+    );
+    
+  $form['siguiente'] = array(
+      '#type' => 'submit',
+      '#value' => t('Siguiente'),
+      '#name' => 'continue',
+      '#attributes' => array('class' => array('form-send')),
+    );
+
+  return $form;
+}
+
+function tol_linea_detalle_validacion_form_submit($form, &$form_state){
+ //AQUI VA LA LÓGICA DE NEGOCIO
+}
+
+
+
+function tol_linea_bloquear_equipo_form($form, &$form_state){
+
+		$today = date("Y-m-d, g:i:s a");
+error_log("tol_linea_bloquear_equipo_form $today  \n",3,'/mnt/logs/drupal/zz.log');
+
+  $form = array();
+
+  $form['id'] = array(
+    '#type' => 'hidden',
+    '#title' => t('id'),
+  );
+
+  $form['robo'] = array(
+    '#type' => 'submit',
+    '#value' => t('Robo'),
+    '#name' => 'robo',
+    '#attributes' => array('class' => array('form-robo')),
+  );
+    
+  $form['perdida'] = array(
+    '#type' => 'submit',
+    '#value' => t('Perdida'),
+    '#name' => 'perdida',
+    '#attributes' => array('class' => array('form-perdida')),
+  );
+
+  return $form;
+}
+
+function tol_linea_bloquear_equipo_form_submit($form, &$form_state){
+ //AQUI VA LA LÓGICA DE NEGOCIO
+}
+
+function tol_linea_bloquear_linea_form($form, &$form_state){
+
+  $form = array();
+
+  $form['id'] = array(
+    '#type' => 'hidden',
+    '#title' => t('id'),
+  );
+
+  $form['aceptar'] = array(
+      '#type' => 'submit',
+      '#value' => t('Aceptar'),
+      '#name' => 'continue',
+      '#attributes' => array('class' => array('form-send')),
+    );
+    
+  $form['cancelar'] = array(
+      '#type' => 'submit',
+      '#value' => t('Cancelar'),
+      '#name' => 'cancelar',
+      '#attributes' => array('class' => array('form-cancel')),
+    );
+
+  return $form;
+}
+
+function tol_linea_bloquear_linea_form_submit($form, &$form_state){
+ //AQUI VA LA LÓGICA DE NEGOCIO
+}

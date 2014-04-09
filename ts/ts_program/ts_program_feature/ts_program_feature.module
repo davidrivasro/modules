@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Tigo Star Program Feature feature.
+ */
+
+include_once 'ts_program_feature.features.inc';

@@ -1,0 +1,30 @@
+<?php
+
+define('TS_FAQ_PATH', 'ts-faq');
+
+/**
+ * Implements hook_menu().
+ */
+function ts_faq_menu() {
+  $items[TS_FAQ_PATH] = array(
+    'title' => 'FAQ',
+    'page callback' => 'ts_faq_content_faq_page',
+    'access callback' => TRUE,
+    'file' => 'ts_faq.pages.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_node_view().
+ */
+function ts_faq_node_view($node, $view_mode, $langcode) {
+  switch ($node->type) {
+    case 'faqs':
+    if ($view_mode == 'full') {
+      drupal_goto(TS_FAQ_PATH);
+    }
+    break;
+  }
+}

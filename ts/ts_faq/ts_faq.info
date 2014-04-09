@@ -1,0 +1,6 @@
+name = Tigo Star FAQ
+description = Tigo Star FAQ page
+core = 7.x
+package = Tigo Star
+
+dependencies[] = faqs

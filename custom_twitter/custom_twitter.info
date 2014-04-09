@@ -1,0 +1,7 @@
+name = Custom Twitter
+description = Show a Block with the last tweets from a twitter account, implements the library jTweetsAnywhere
+core = 7.x
+version = 7.x-0.1
+package = Custom
+
+dependencies[] = block
